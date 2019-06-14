@@ -26,7 +26,7 @@ module.exports = {
     port: 8282,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
     proxyTable: {
       '/e': {
         target: 'http://10.0.0.22:9789/',
