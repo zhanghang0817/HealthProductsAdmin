@@ -2,6 +2,12 @@
 
 > A Vue.js project
 
+
+开发环境地址：http://10.0.0.22:10011/
+测试环境地址：http://10.0.0.105:10007/
+线上环境地址：http://e-admin.rxhui.com/
+
+登陆账号和密码：开发，测试（admin 111111） 线上（admin  123456）
 ## Build Setup
 
 ``` bash
