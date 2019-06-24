@@ -40,6 +40,7 @@
             <el-menu-item  index="1-1" @click="goPage('/portfolioMage')" v-if="menuList.indexOf('group:view') == -1?false:true">组合管理</el-menu-item>
             <el-menu-item  index="1-2" @click="goPage('/GroupMage')" v-if="menuList.indexOf('grouping:view') == -1?false:true">分组管理</el-menu-item>
           </el-submenu>
+          <el-menu-item index="7" @click="goPage('/level2coupon')" v-if="menuList.indexOf('level2coupon:view') == -1?false:true"><i class="fa fa-ticket"></i>Level2体验券管理</el-menu-item>
           <!--<el-submenu index="7" v-if="isShowAllCompany">-->
             <!--<template slot="title"><i class="fa fa-industry"></i>私募资管产品</template>-->
             <!--<el-menu-item  index="1-1" @click="goPage('/privateEquity')">私募数据</el-menu-item>-->
@@ -212,6 +213,9 @@ export default {
         return false
       } else if (_this.menuList.indexOf('grouping:view') !== -1) {
         _this.$router.push('/GroupMage')
+        return false
+      } else if (_this.menuList.indexOf('level2coupon:view') !== -1) {
+        _this.$router.push('/level2Mage')
         return false
       }
     }

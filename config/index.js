@@ -50,14 +50,14 @@ module.exports = {
         }
       },
       '/sqdl': {
-        target: 'http://10.0.0.105:9098',
+        target: 'http://10.0.0.22:9098',
         changeOrigin: true,
         pathRewrite: {
           '^/sqdl': '/'
         }
       },
       '/analyse/hczq/home/': {
-        target: 'http://10.0.0.105:9093',
+        target: 'http://10.0.0.22:9093',
         changeOrigin: true,
         pathRewrite: {
           '^/analyse/hczq/home/': '/'
