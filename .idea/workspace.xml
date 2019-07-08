@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="027326ad-9163-4599-aa77-6cfec313970b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/Level2Coupon.vue" afterPath="$PROJECT_DIR$/src/views/Level2Coupon.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -20,8 +19,8 @@
       <file leaf-file-name="Level2Coupon.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/views/Level2Coupon.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="580">
-              <caret line="476" column="9" lean-forward="true" selection-start-line="476" selection-start-column="9" selection-end-line="476" selection-end-column="9" />
+            <state relative-caret-position="418">
+              <caret line="364" column="45" lean-forward="true" selection-start-line="364" selection-start-column="45" selection-end-line="364" selection-end-column="45" />
               <folding>
                 <element signature="n#style#0;n#el-select#0;n#div#0;n#el-col#1;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#el-select#1;n#div#0;n#el-col#1;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -33,8 +32,8 @@
                 <element signature="n#style#0;n#span#0;n#div#0;n#el-row#3;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="e#12170#13446#0" expanded="false" />
-                <element signature="e#13790#14572#0" expanded="false" />
+                <element signature="e#12221#13497#0" expanded="false" />
+                <element signature="e#13841#14623#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -377,7 +376,7 @@
       <workItem from="1561009071548" duration="33188000" />
       <workItem from="1561347376950" duration="36000" />
       <workItem from="1561947501059" duration="10294000" />
-      <workItem from="1562320976102" duration="28216000" />
+      <workItem from="1562320976102" duration="28894000" />
     </task>
     <task id="LOCAL-00001" summary="配置忽略文件">
       <created>1560997628313</created>
@@ -390,12 +389,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73796000" />
+    <option name="totallyTimeSpent" value="74474000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1634" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16917293" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16917293" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -447,8 +447,8 @@
             <element signature="n#style#0;n#span#0;n#div#0;n#el-row#3;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#12170#13446#0" expanded="false" />
-            <element signature="e#13790#14572#0" expanded="false" />
+            <element signature="e#12221#13497#0" expanded="false" />
+            <element signature="e#13841#14623#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -492,8 +492,8 @@
             <element signature="n#style#0;n#span#0;n#div#0;n#el-row#3;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#12170#13446#0" expanded="false" />
-            <element signature="e#13790#14572#0" expanded="false" />
+            <element signature="e#12221#13497#0" expanded="false" />
+            <element signature="e#13841#14623#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -857,8 +857,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/Level2Coupon.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="476" column="9" lean-forward="true" selection-start-line="476" selection-start-column="9" selection-end-line="476" selection-end-column="9" />
+        <state relative-caret-position="418">
+          <caret line="364" column="45" lean-forward="true" selection-start-line="364" selection-start-column="45" selection-end-line="364" selection-end-column="45" />
           <folding>
             <element signature="n#style#0;n#el-select#0;n#div#0;n#el-col#1;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-select#1;n#div#0;n#el-col#1;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -870,8 +870,8 @@
             <element signature="n#style#0;n#span#0;n#div#0;n#el-row#3;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#12170#13446#0" expanded="false" />
-            <element signature="e#13790#14572#0" expanded="false" />
+            <element signature="e#12221#13497#0" expanded="false" />
+            <element signature="e#13841#14623#0" expanded="false" />
           </folding>
         </state>
       </provider>

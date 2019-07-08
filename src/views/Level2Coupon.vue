@@ -365,7 +365,9 @@
           var receivedNum = data.receivedNum;
           var usedNum = data.usedNum;
           var unreceivedExpiresNum = data.unreceivedExpiresNum;
-          this.descStr = '所有营业部，已发：' + totalNum + '，已领取：' + receivedNum + '，已使用：' + usedNum + '，已失效：' + unreceivedExpiresNum;
+          if(data.currentPage == 1){
+            this.descStr = '所有营业部，已发：' + totalNum + '，已领取：' + receivedNum + '，已使用：' + usedNum + '，已失效：' + unreceivedExpiresNum;
+          }
           if (data.infos) {
             for (var i = 0; i < data.infos.length; i++) {
               var info = data.infos[i];
