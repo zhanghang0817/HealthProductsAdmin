@@ -9,7 +9,9 @@
             type="daterange"
             range-separator="至"
             start-placeholder="开始日期"
-            end-placeholder="结束日期">
+            end-placeholder="结束日期"
+            style="width: 219px"
+          >
           </el-date-picker>
         </div>
       </el-col>
@@ -37,7 +39,7 @@
       <el-col :span="8">
         <div class="block">
           <span class="demonstration">有效期：</span>
-          <el-select v-model="validityTime_value" placeholder="请选择" >
+          <el-select v-model="validityTime_value"  style="width: 219px" placeholder="请选择">
             <el-option
               v-for="item in validityTime_options"
               :key="item.value"
@@ -52,13 +54,13 @@
       <el-col :span="8">
         <div class="block">
           <span class="demonstration"> 资金账号：</span>
-          <el-input ref="input" v-model="fund_account_value" placeholder="请输入内容" style="width: 220px"></el-input>
+          <el-input ref="input" v-model="fund_account_value" placeholder="请输入内容" style="width: 219px"></el-input>
         </div>
       </el-col>
       <el-col :span="8">
         <div class="block">
           <span class="demonstration">类型：</span>
-          <el-select v-model="type_value" placeholder="请选择">
+          <el-select v-model="type_value" placeholder="请选择" style="width: 223px">
             <el-option
               v-for="item in type_options"
               :key="item.value"
@@ -71,7 +73,7 @@
       <el-col :span="8">
         <div class="block">
           <span class="demonstration">领取状态：</span>
-          <el-select v-model="getStatus_value" placeholder="请选择">
+          <el-select v-model="getStatus_value" placeholder="请选择" style="width: 219px">
             <el-option
               v-for="item in getStatus_options"
               :key="item.value"
@@ -86,7 +88,7 @@
     <el-row style="margin-top: 40px">
       <div style="text-align: center">
         <el-button v-if="menuList.indexOf('level2coupon:query') == -1?false:true" @click="getCouponsData">查询</el-button>
-        <el-button>重置</el-button>
+        <el-button @click="reset">重置</el-button>
         <el-button v-if="menuList.indexOf('level2coupon:excel') == -1?false:true" @click="exportExcel">导出</el-button>
       </div>
     </el-row>
@@ -164,13 +166,13 @@
     </el-table>
 
     <!--<el-pagination-->
-      <!--background-->
-      <!--:pager-count="11"-->
-      <!--:page-size="20"-->
-      <!--layout="prev, pager, next"-->
-      <!--:total="1000"-->
-      <!--style="margin-top: 30px;text-align: right"-->
-      <!--@current-change="queryDataByPageNum"-->
+    <!--background-->
+    <!--:pager-count="11"-->
+    <!--:page-size="20"-->
+    <!--layout="prev, pager, next"-->
+    <!--:total="1000"-->
+    <!--style="margin-top: 30px;text-align: right"-->
+    <!--@current-change="queryDataByPageNum"-->
     <!--&gt;-->
     <!--</el-pagination>-->
 
@@ -192,8 +194,8 @@
       return {
         menuList: [],    // 获取权限
         descStr: '************************',
-        currentPage:1,
-        hasNextPage:false,
+        currentPage: 1,
+        hasNextPage: false,
         hasProPage: false,
         TimeSpace: [startDate, currentDate],
         fund_account_value: '',
@@ -207,6 +209,10 @@
 
         validityTime_options: [
           {
+            value: 'all',
+            label: '所有'
+          },
+          {
             value: '6',
             label: '6个月'
           }, {
@@ -215,13 +221,13 @@
           }, {
             value: '1',
             label: '1个月'
-          }, {
-            value: 'all',
-            label: '所有'
           }],
         validityTime_value: '',
 
-        type_options: [{
+        type_options: [ {
+          value: 'all',
+          label: '所有'
+        },{
           value: '1',
           label: '每个自然月首次新增资产达5~30万'
         }, {
@@ -245,13 +251,13 @@
         }, {
           value: '8',
           label: '新开期权账户'
-        }, {
-          value: 'all',
-          label: '所有'
         }],
         type_value: '',
 
         getStatus_options: [{
+          value: 'all',
+          label: '所有'
+        },{
           value: '1',
           label: '未领取'
         }, {
@@ -266,9 +272,6 @@
         }, {
           value: '4',
           label: '已失效'
-        }, {
-          value: 'all',
-          label: '所有'
         }],
         getStatus_value: '',
 
@@ -278,7 +281,6 @@
     methods: {
       assembleQueryParams: function () {
         var params = {};
-
         var startAt = this.TimeSpace[0].getTime();
         params.startAt = startAt;
         var endAt = this.TimeSpace[1].getTime();
@@ -290,7 +292,6 @@
 
         var sales_value = this.sales_value;
         this.sales_options.map(function (value) {
-
           if (value.value == sales_value) {
             if (value.value !== "all") {
               params.deptSerialNo = value.value;
@@ -328,7 +329,6 @@
 
         var getStatus_value = this.getStatus_value;
         this.getStatus_options.map(function (value) {
-          console.log(value.value + '||' + getStatus_value);
           if (value.value == getStatus_value) {
             if (value.value !== "all") {
               params.status = value.value;
@@ -338,7 +338,7 @@
         return params;
       }, getCouponsData: function (cp) {
         var params = this.assembleQueryParams();
-        if(cp){
+        if (cp && !isNaN(cp)) {
           params.cp = cp;
         }
         params.ps = 20;
@@ -356,7 +356,7 @@
           if (!data) return;
           this.hasNextPage = data.hasNextPage;
           this.currentPage = data.currentPage;
-          if(data.currentPage == 1){
+          if (data.currentPage == 1) {
             this.hasProPage = true;
           } else {
             this.hasProPage = false;
@@ -365,7 +365,7 @@
           var receivedNum = data.receivedNum;
           var usedNum = data.usedNum;
           var unreceivedExpiresNum = data.unreceivedExpiresNum;
-          if(data.currentPage == 1){
+          if (data.currentPage == 1) {
             this.descStr = '所有营业部，已发：' + totalNum + '，已领取：' + receivedNum + '，已使用：' + usedNum + '，已失效：' + unreceivedExpiresNum;
           }
           if (data.infos) {
@@ -378,19 +378,19 @@
               item.sales = info.subDeptName;
 
               this.type_options.map(function (value) {
-                if(value.value == info.couponType){
+                if (value.value == info.couponType) {
                   item.type = value.label;
                 }
               });
 
               this.validityTime_options.map(function (value) {
-                if(value.value == info.couponTerm){
+                if (value.value == info.couponTerm) {
                   item.validity_time = value.label;
                 }
               });
 
               this.getStatus_options.map(function (value) {
-                if(value.value == info.status){
+                if (value.value == info.status) {
                   item.state = value.label;
                 }
               })
@@ -409,8 +409,8 @@
       queryBranch: function (value) {
         if (value === 'all' || value === '所有') {
           this.branch_selected = true;
-          this.branch_options= [];
-          this.branch_value= '';
+          this.branch_options = [];
+          this.branch_value = '';
         } else {
           this.branch_selected = false;
           this.getData('quota/coupon/branchInfo', value);
@@ -452,20 +452,18 @@
             arrays.push(option);
           }
 
-          if (!branchNo) {
+          if (branchNo) {
+            if (data) {
+              this.branch_value = this.branch_options[0].value
+            }
+          } else {
             var option = {}
             option.value = 'all';
             option.label = '所有';
-            arrays.push(option);
-            this.sales_value = this.sales_options[this.sales_options.length - 1].label
-
+            arrays.unshift(option);
+            this.sales_value = this.sales_options[0].value;
             //查询当前选中状态的优惠券数据
             this.getCouponsData();
-          } else {
-            if (data) {
-              this.branch_value = this.branch_options[0].label
-            }
-
           }
 
         })
@@ -474,10 +472,10 @@
       exportExcel: function () {
         var path = 'quota/coupon/csv?';
         var params = this.assembleQueryParams()
-        for(var prop in params){
-          path += prop + '=' + params[prop]+'&';
+        for (var prop in params) {
+          path += prop + '=' + params[prop] + '&';
         }
-        path = path.substr(0,path.length-1);
+        path = path.substr(0, path.length - 1);
         window.open('e/' + path);
       },
 
@@ -523,17 +521,34 @@
         this.getCouponsData(this.currentPage)
       },
 
-      },
-      mounted: function () {
-        this.menuList = localStorage.menuList;
-        this.getBranchInfo();
-        this.getStatus_value = this.getStatus_options[this.getStatus_options.length - 1].label;
-        this.type_value = this.type_options[this.type_options.length - 1].label;
-        this.validityTime_value = this.validityTime_options[this.validityTime_options.length - 1].label;
-      },
+      reset: function () {
+        var currentDate = new Date();
+        var month = currentDate.getMonth();
+        var startDate = new Date();
+        startDate.setMonth(month - 1);
+        this.descStr = '************************';
+        this.currentPage = 1;
+        this.hasNextPage = false;
+        this.hasProPage = false;
+        this.TimeSpace = [startDate, currentDate];
+        this.fund_account_value = '';
+        this.getStatus_value = this.getStatus_options[0].value;
+        this.type_value = this.type_options[0].value;
+        this.validityTime_value = this.validityTime_options[0].value;
+        this.sales_value = this.sales_options[0].value;
+        this.branch_value='';
+        this.getCouponsData(this.currentPage);
+      }
 
-
-    };
+    },
+    mounted: function () {
+      this.menuList = localStorage.menuList;
+      this.getBranchInfo();
+      this.getStatus_value = this.getStatus_options[0].value;
+      this.type_value = this.type_options[0].value;
+      this.validityTime_value = this.validityTime_options[0].value;
+    }
+  };
 
 
 </script>
