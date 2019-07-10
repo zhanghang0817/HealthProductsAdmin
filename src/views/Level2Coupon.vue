@@ -125,7 +125,7 @@
         align="center"
         prop="sales"
         label="营业部"
-        width="120">
+        width="280">
       </el-table-column>
       <el-table-column
         align="center"
@@ -155,7 +155,7 @@
         align="center"
         prop="state"
         label="优惠券状态"
-        width="120">
+        width="200">
       </el-table-column>
       <el-table-column
         align="center"
@@ -268,10 +268,10 @@
           label: '已使用'
         }, {
           value: '3',
-          label: '已过期'
+          label: '已过期（未使用）'
         }, {
           value: '4',
-          label: '已失效'
+          label: '已失效（未领取）'
         }],
         getStatus_value: '',
 
@@ -375,7 +375,7 @@
           var usedNum = data.usedNum;
           var unreceivedExpiresNum = data.unreceivedExpiresNum;
           if (data.currentPage == 1) {
-            this.descStr = '所有营业部，已发：' + totalNum + '，已领取：' + receivedNum + '，已使用：' + usedNum + '，已失效：' + unreceivedExpiresNum;
+            this.descStr = '所有营业部，已发：' + totalNum + '，已领取：' + receivedNum + '，已使用：' + usedNum + '，已失效（未领取）：' + unreceivedExpiresNum;
           }
           if (data.infos) {
             for (var i = 0; i < data.infos.length; i++) {
