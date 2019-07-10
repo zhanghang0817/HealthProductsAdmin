@@ -281,9 +281,18 @@
     methods: {
       assembleQueryParams: function () {
         var params = {};
-        var startAt = this.TimeSpace[0].getTime();
+        var startDate = this.TimeSpace[0];
+        startDate.setHours(0);
+        startDate.setMinutes(0);
+        startDate.setSeconds(0);
+        var startAt = startDate.getTime();
         params.startAt = startAt;
-        var endAt = this.TimeSpace[1].getTime();
+
+        var endDate = this.TimeSpace[1];
+        endDate.setHours(23);
+        endDate.setMinutes(59);
+        endDate.setSeconds(59);
+        var endAt = endDate.getTime();
         params.endAt = endAt;
         var fund_account_value = this.fund_account_value;
         if (!this.isEmpty(fund_account_value)) {
