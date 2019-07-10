@@ -356,7 +356,7 @@
         var path = 'quota/coupon/info';
         this.$http({
           method: 'GET',
-          url: 'e/' + path,
+          url: 'e/operate/' + path,
           params: params,
           headers: {'X-Requested-With': 'XMLHttpRequest'},
           emulateJSON: true
@@ -439,7 +439,7 @@
         ;
         this.$http({
           method: 'GET',
-          url: 'e/' + path,
+          url: 'e/'+'operate/' + path,
           headers: {'X-Requested-With': 'XMLHttpRequest'},
           emulateJSON: true,
           params: params
@@ -485,7 +485,7 @@
           path += prop + '=' + params[prop] + '&';
         }
         path = path.substr(0, path.length - 1);
-        window.open('e/' + path);
+        window.open('e/operate/' + path);
       },
 
       formatTime: function (fmt, date) {
