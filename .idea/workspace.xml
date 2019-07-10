@@ -19,8 +19,8 @@
       <file leaf-file-name="Level2Coupon.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/views/Level2Coupon.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1919">
-              <caret line="352" column="23" lean-forward="true" selection-start-line="352" selection-start-column="23" selection-end-line="352" selection-end-column="23" />
+            <state relative-caret-position="-4021">
+              <caret line="267" column="31" lean-forward="true" selection-start-line="267" selection-start-column="31" selection-end-line="267" selection-end-column="31" />
               <folding>
                 <element signature="n#style#0;n#el-date-picker#0;n#div#0;n#el-col#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#el-select#0;n#div#0;n#el-col#1;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -36,7 +36,7 @@
                 <element signature="n#style#0;n#span#0;n#div#0;n#el-row#3;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <marker date="1562736579498" expanded="false" signature="14205:14987" ph="{...}" />
+                <marker date="1562756580634" expanded="false" signature="14151:14933" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -222,24 +222,6 @@
             <path>
               <item name="Root" type="cbb8eebc:String" user="Root" />
               <item name="e-admin" type="cbb8eebc:String" user="e-admin" />
-              <item name="src" type="cbb8eebc:String" user="src" />
-              <item name="components" type="cbb8eebc:String" user="components" />
-            </path>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="e-admin" type="cbb8eebc:String" user="e-admin" />
-              <item name="src" type="cbb8eebc:String" user="src" />
-              <item name="router" type="cbb8eebc:String" user="router" />
-            </path>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="e-admin" type="cbb8eebc:String" user="e-admin" />
-              <item name="src" type="cbb8eebc:String" user="src" />
-              <item name="views" type="cbb8eebc:String" user="views" />
-            </path>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="e-admin" type="cbb8eebc:String" user="e-admin" />
               <item name="static" type="cbb8eebc:String" user="static" />
             </path>
             <path>
@@ -295,7 +277,7 @@
       <workItem from="1561347376950" duration="36000" />
       <workItem from="1561947501059" duration="10294000" />
       <workItem from="1562320976102" duration="38973000" />
-      <workItem from="1562654643817" duration="7946000" />
+      <workItem from="1562654643817" duration="11375000" />
     </task>
     <task id="LOCAL-00001" summary="配置忽略文件">
       <created>1560997628313</created>
@@ -308,7 +290,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92499000" />
+    <option name="totallyTimeSpent" value="95928000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1634" height="1066" extended-state="6" />
@@ -370,7 +352,7 @@
             <element signature="n#style#0;n#span#0;n#div#0;n#el-row#3;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <marker date="1562736579498" expanded="false" signature="14205:14987" ph="{...}" />
+            <marker date="1562756580634" expanded="false" signature="14151:14933" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -418,7 +400,7 @@
             <element signature="n#style#0;n#span#0;n#div#0;n#el-row#3;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <marker date="1562736579498" expanded="false" signature="14205:14987" ph="{...}" />
+            <marker date="1562756580634" expanded="false" signature="14151:14933" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -769,8 +751,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/Level2Coupon.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1919">
-          <caret line="352" column="23" lean-forward="true" selection-start-line="352" selection-start-column="23" selection-end-line="352" selection-end-column="23" />
+        <state relative-caret-position="-4021">
+          <caret line="267" column="31" lean-forward="true" selection-start-line="267" selection-start-column="31" selection-end-line="267" selection-end-column="31" />
           <folding>
             <element signature="n#style#0;n#el-date-picker#0;n#div#0;n#el-col#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-select#0;n#div#0;n#el-col#1;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -786,7 +768,7 @@
             <element signature="n#style#0;n#span#0;n#div#0;n#el-row#3;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <marker date="1562736579498" expanded="false" signature="14205:14987" ph="{...}" />
+            <marker date="1562756580634" expanded="false" signature="14151:14933" ph="{...}" />
           </folding>
         </state>
       </provider>

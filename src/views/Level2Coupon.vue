@@ -39,7 +39,7 @@
       <el-col :span="8">
         <div class="block">
           <span class="demonstration">有效期：</span>
-          <el-select v-model="validityTime_value"  style="width: 219px" placeholder="请选择">
+          <el-select v-model="validityTime_value" style="width: 219px" placeholder="请选择">
             <el-option
               v-for="item in validityTime_options"
               :key="item.value"
@@ -165,17 +165,6 @@
       </el-table-column>
     </el-table>
 
-    <!--<el-pagination-->
-    <!--background-->
-    <!--:pager-count="11"-->
-    <!--:page-size="20"-->
-    <!--layout="prev, pager, next"-->
-    <!--:total="1000"-->
-    <!--style="margin-top: 30px;text-align: right"-->
-    <!--@current-change="queryDataByPageNum"-->
-    <!--&gt;-->
-    <!--</el-pagination>-->
-
     <div class="block" style="float:right;margin:10px 18px">
       <el-button type="primary" :disabled="hasProPage" @click="nextPage('-1')">上一页</el-button>
       第{{currentPage}}页
@@ -224,10 +213,10 @@
           }],
         validityTime_value: '',
 
-        type_options: [ {
+        type_options: [{
           value: 'all',
           label: '所有'
-        },{
+        }, {
           value: '1',
           label: '每个自然月首次新增资产达5~30万'
         }, {
@@ -257,7 +246,7 @@
         getStatus_options: [{
           value: 'all',
           label: '所有'
-        },{
+        }, {
           value: '1',
           label: '未领取'
         }, {
@@ -275,7 +264,8 @@
         }],
         getStatus_value: '',
 
-        tableData: []
+        tableData: [],
+        departmentName: '所有营业部'
       };
     },
     methods: {
@@ -316,6 +306,13 @@
             }
           }
         });
+
+        if(!this.isEmpty(sales_value) && !this.isEmpty(branch_value)){
+          this.departmentName = sales_value + '--' + branch_value;
+        } else {
+          this.departmentName = '所有营业部';
+        }
+
 
         var validityTime_value = this.validityTime_value;
         this.validityTime_options.map(function (value) {
@@ -375,7 +372,7 @@
           var usedNum = data.usedNum;
           var unreceivedExpiresNum = data.unreceivedExpiresNum;
           if (data.currentPage == 1) {
-            this.descStr = '所有营业部，已发：' + totalNum + '，已领取：' + receivedNum + '，已使用：' + usedNum + '，已失效（未领取）：' + unreceivedExpiresNum;
+            this.descStr = this.departmentName + '，已发：' + totalNum + '，已领取：' + receivedNum + '，已使用：' + usedNum + '，已失效（未领取）：' + unreceivedExpiresNum;
           }
           if (data.infos) {
             for (var i = 0; i < data.infos.length; i++) {
@@ -439,7 +436,7 @@
         ;
         this.$http({
           method: 'GET',
-          url: 'e/'+'operate/' + path,
+          url: 'e/' + 'operate/' + path,
           headers: {'X-Requested-With': 'XMLHttpRequest'},
           emulateJSON: true,
           params: params
@@ -545,7 +542,7 @@
         this.type_value = this.type_options[0].value;
         this.validityTime_value = this.validityTime_options[0].value;
         this.sales_value = this.sales_options[0].value;
-        this.branch_value='';
+        this.branch_value = '';
         this.getCouponsData(this.currentPage);
       }
 
