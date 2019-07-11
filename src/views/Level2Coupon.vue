@@ -312,7 +312,7 @@
         });
 
         if(!this.isEmpty(sales_name) && !this.isEmpty(branch_name)){
-          this.departmentName = sales_value + '--' + branch_value;
+          this.departmentName = sales_name + '--' + branch_name;
         } else {
           this.departmentName = '所有营业部';
         }

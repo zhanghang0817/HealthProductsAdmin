@@ -20,7 +20,7 @@
         <entry file="file://$PROJECT_DIR$/src/views/Level2Coupon.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="461">
-              <caret line="316" column="40" lean-forward="true" selection-start-line="316" selection-start-column="40" selection-end-line="316" selection-end-column="40" />
+              <caret line="314" column="63" lean-forward="false" selection-start-line="314" selection-start-column="52" selection-end-line="314" selection-end-column="63" />
               <folding>
                 <element signature="n#style#0;n#el-date-picker#0;n#div#0;n#el-col#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#el-select#0;n#div#0;n#el-col#1;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -36,7 +36,7 @@
                 <element signature="n#style#0;n#span#0;n#div#0;n#el-row#3;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <marker date="1562816381269" expanded="false" signature="14289:15071" ph="{...}" />
+                <marker date="1562823510646" expanded="false" signature="14287:15069" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -73,7 +73,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mounted</find>
       <find>menuList</find>
       <find>data</find>
       <find>level2Mage</find>
@@ -103,6 +102,7 @@
       <find>branch_value</find>
       <find>e/</find>
       <find>param</find>
+      <find>departmentName</find>
     </findStrings>
     <replaceStrings>
       <replace>def_time</replace>
@@ -277,7 +277,7 @@
       <workItem from="1561347376950" duration="36000" />
       <workItem from="1561947501059" duration="10294000" />
       <workItem from="1562320976102" duration="38973000" />
-      <workItem from="1562654643817" duration="12737000" />
+      <workItem from="1562654643817" duration="14175000" />
     </task>
     <task id="LOCAL-00001" summary="配置忽略文件">
       <created>1560997628313</created>
@@ -290,7 +290,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="97290000" />
+    <option name="totallyTimeSpent" value="98728000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1634" height="1066" extended-state="6" />
@@ -351,7 +351,7 @@
             <element signature="n#style#0;n#span#0;n#div#0;n#el-row#3;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <marker date="1562816381269" expanded="false" signature="14289:15071" ph="{...}" />
+            <marker date="1562823510646" expanded="false" signature="14287:15069" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -399,7 +399,7 @@
             <element signature="n#style#0;n#span#0;n#div#0;n#el-row#3;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <marker date="1562816381269" expanded="false" signature="14289:15071" ph="{...}" />
+            <marker date="1562823510646" expanded="false" signature="14287:15069" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -751,7 +751,7 @@
     <entry file="file://$PROJECT_DIR$/src/views/Level2Coupon.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="461">
-          <caret line="316" column="40" lean-forward="true" selection-start-line="316" selection-start-column="40" selection-end-line="316" selection-end-column="40" />
+          <caret line="314" column="63" lean-forward="false" selection-start-line="314" selection-start-column="52" selection-end-line="314" selection-end-column="63" />
           <folding>
             <element signature="n#style#0;n#el-date-picker#0;n#div#0;n#el-col#0;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-select#0;n#div#0;n#el-col#1;n#el-row#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -767,7 +767,7 @@
             <element signature="n#style#0;n#span#0;n#div#0;n#el-row#3;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-table#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <marker date="1562816381269" expanded="false" signature="14289:15071" ph="{...}" />
+            <marker date="1562823510646" expanded="false" signature="14287:15069" ph="{...}" />
           </folding>
         </state>
       </provider>
