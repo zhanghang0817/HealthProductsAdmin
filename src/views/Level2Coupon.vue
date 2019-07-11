@@ -290,24 +290,28 @@
         }
 
         var sales_value = this.sales_value;
+        var sales_name = '';
         this.sales_options.map(function (value) {
           if (value.value == sales_value) {
             if (value.value !== "all") {
               params.deptSerialNo = value.value;
+              sales_name = value.label;
             }
           }
         });
 
         var branch_value = this.branch_value;
+        var branch_name = '';
         this.branch_options.map(function (value) {
           if (value.value == branch_value) {
             if (value.value !== "all") {
               params.subDeptSerialNo = value.value;
+              branch_name = value.label;
             }
           }
         });
 
-        if(!this.isEmpty(sales_value) && !this.isEmpty(branch_value)){
+        if(!this.isEmpty(sales_name) && !this.isEmpty(branch_name)){
           this.departmentName = sales_value + '--' + branch_value;
         } else {
           this.departmentName = '所有营业部';
