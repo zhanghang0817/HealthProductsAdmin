@@ -13,6 +13,7 @@ import PortfolioMage from '@/views/PortfolioMage.vue'
 import GroupMage from '@/views/GroupMage.vue'
 import PrivateEquity from '@/views/PrivateEquity.vue'
 import CustomMade from '@/views/CustomMade.vue'
+import Level2coupon from '@/views/Level2Coupon.vue'
 
 Vue.use(Router)
 
@@ -39,7 +40,8 @@ export default new Router({
         {path: '/portfolioMage', component: PortfolioMage, name: '组合管理'},
         {path: '/groupMage', component: GroupMage, name: '分组管理'},
         {path: '/privateEquity', component: PrivateEquity, name: '私募数据'},
-        {path: '/customMade', component: CustomMade, name: '用户定制信息'}
+        {path: '/customMade', component: CustomMade, name: '用户定制信息'},
+        {path: '/level2coupon', component: Level2coupon, name: 'Level2体验券管理'}
       ]
     }
   ]
