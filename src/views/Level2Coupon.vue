@@ -408,7 +408,7 @@
               item.phone = info.phone ? info.phone : '-';
 
               item.get_time = info.receiveAt ? this.formatTime("yyyy-MM-dd \r\n hh:mm:ss", new Date(+info.receiveAt)) : '-';
-              item.use_time = info.used_at ? this.formatTime("yyyy-MM-dd \r\n hh:mm:ss", new Date(+info.used_at)) : '-';
+              item.use_time = info.usedAt ? this.formatTime("yyyy-MM-dd \r\n hh:mm:ss", new Date(+info.usedAt)) : '-';
               this.tableData.push(item);
             }
           }
