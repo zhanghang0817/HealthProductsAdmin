@@ -215,7 +215,7 @@ export default {
         _this.$router.push('/GroupMage')
         return false
       } else if (_this.menuList.indexOf('level2coupon:view') !== -1) {
-        _this.$router.push('/level2Mage')
+        _this.$router.push('/level2coupon')
         return false
       }
     }
