@@ -70,6 +70,10 @@
             <el-option v-for="(item,index) in ruleForm2.columnList" :key="index" :label="item.name" :value="item.code"></el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="推送标题*" prop="pushTitle">
+          <el-input type="input" v-model="ruleForm2.pushTitle" auto-complete="off" class="iptWidth50" :maxlength="15"
+                    placeholder="请添加推送标题"></el-input>
+        </el-form-item>
         <el-form-item label="音频" prop="audio">
           <el-input type="input" v-model="ruleForm2.audio" class="iptWidth50" placeholder="请选择文件"></el-input>
           <el-upload
@@ -114,6 +118,16 @@
           callback()
         }
       }
+      var validatePushTitle = (rule, value, callback) => {
+//        console.log(value)
+        if (value === '') {
+          callback(new Error('请输入推送标题'))
+        } else if (value.length > 15) {
+          callback(new Error('标题不能大于15个字符'))
+        } else {
+          callback()
+        }
+      }
       var validateColumn = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请选择栏目'))
@@ -137,7 +151,8 @@
           source: '',
           column: '',
           columnList: '',
-          content: ''
+          content: '',
+          pushTitle:''
         },
         rules: {
           title: [
@@ -148,6 +163,9 @@
           ],
           source: [
             {validator: validateSource, trigger: 'blur'}
+          ],
+          pushTitle:[
+            {validator: validatePushTitle, trigger: 'blur'}
           ]
         },
         editorOption: {
@@ -233,7 +251,8 @@
             source: this.ruleForm2.source.trim(),
             columnCode: this.ruleForm2.column,
             audioUrl: this.ruleForm2.audio,
-            articleContent: this.ruleForm2.content
+            articleContent: this.ruleForm2.content,
+            pushHeadline:this.ruleForm2.pushTitle
           },
           headers: {'X-Requested-With': 'XMLHttpRequest'},
           emulateJSON: false
