@@ -356,6 +356,7 @@
           this.ruleForm2.title = result.data.data.title
           this.ruleForm2.column = result.data.data.columnCode
           this.ruleForm2.vidio = result.data.data.videoUrl
+          this.ruleForm2.pushTitle = result.data.data.pushHeadline
           this.activeName = 'second'
         }).catch(() => {
           this.$message.error('请重新登录')

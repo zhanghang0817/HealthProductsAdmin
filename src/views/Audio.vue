@@ -382,6 +382,7 @@
           this.ruleForm2.title = result.data.data.title
           this.ruleForm2.column = result.data.data.columnCode
           this.ruleForm2.audio = result.data.data.audioUrl
+          this.ruleForm2.pushTitle = result.data.data.pushHeadline
           this.activeName = 'second'
 //          this.getAudioList()
         }).catch(() => {

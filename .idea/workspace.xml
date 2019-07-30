@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="027326ad-9163-4599-aa77-6cfec313970b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/Audio.vue" afterPath="$PROJECT_DIR$/src/views/Audio.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/Video.vue" afterPath="$PROJECT_DIR$/src/views/Video.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -80,21 +81,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Audio.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Audio.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/Audio.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="19" column="21" lean-forward="true" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+            <state relative-caret-position="385">
+              <caret line="384" column="10" lean-forward="true" selection-start-line="384" selection-start-column="10" selection-end-line="384" selection-end-column="66" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Video.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Video.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/views/Video.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-679">
-              <caret line="76" column="50" lean-forward="true" selection-start-line="76" selection-start-column="50" selection-end-line="76" selection-end-column="50" />
+            <state relative-caret-position="266">
+              <caret line="351" column="41" lean-forward="true" selection-start-line="351" selection-start-column="41" selection-end-line="351" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -111,7 +112,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>selectDemonstration</find>
       <find>下一页</find>
       <find>hasProPage</find>
       <find>nextPage</find>
@@ -141,6 +141,7 @@
       <find>pushTitle</find>
       <find>validatePushTitle</find>
       <find>validateTitle</find>
+      <find>ruleForm2.title</find>
     </findStrings>
     <replaceStrings>
       <replace>def_time</replace>
@@ -177,7 +178,7 @@
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="8" />
     <option name="y" value="1" />
     <option name="width" value="1400" />
@@ -303,7 +304,7 @@
       <workItem from="1563515008796" duration="1219000" />
       <workItem from="1563871276256" duration="650000" />
       <workItem from="1564107025796" duration="1408000" />
-      <workItem from="1564456171637" duration="5116000" />
+      <workItem from="1564456171637" duration="6390000" />
     </task>
     <task id="LOCAL-00001" summary="配置忽略文件">
       <created>1560997628313</created>
@@ -316,10 +317,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115077000" />
+    <option name="totallyTimeSpent" value="116351000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1634" height="1066" extended-state="7" />
+    <frame x="-8" y="-8" width="1634" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16604011" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -715,18 +716,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/Video.vue">
+    <entry file="file://$PROJECT_DIR$/src/views/Audio.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-679">
-          <caret line="76" column="50" lean-forward="true" selection-start-line="76" selection-start-column="50" selection-end-line="76" selection-end-column="50" />
+        <state relative-caret-position="385">
+          <caret line="384" column="10" lean-forward="true" selection-start-line="384" selection-start-column="10" selection-end-line="384" selection-end-column="66" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/Audio.vue">
+    <entry file="file://$PROJECT_DIR$/src/views/Video.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="19" column="21" lean-forward="true" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+        <state relative-caret-position="266">
+          <caret line="351" column="41" lean-forward="true" selection-start-line="351" selection-start-column="41" selection-end-line="351" selection-end-column="41" />
           <folding />
         </state>
       </provider>
