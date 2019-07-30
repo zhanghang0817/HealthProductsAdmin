@@ -64,9 +64,9 @@
       </div>
     </div>
 
-    <div style="height: 100px;width:100%;background-color: aqua;margin-top: 80px">
+    <div style="height: 100px;width:100%;background-color: aqua;margin-top: 50px">
 
-      <el-table :data="tableData" highlight-current-row v-loading="listLoading" style="width: 100%;">
+      <el-table  :data="users"  v-loading="listLoading" style="width: 100%;">
         <el-table-column  prop="publishAt" label="发布时间" align="left"  width="150">
           <template slot-scope="scope">
             {{scope.row.publishAt | timeDateChange}}
@@ -79,10 +79,32 @@
         <el-table-column prop="title" label="标题" align="left">
         </el-table-column>
 
-        <el-table-column prop="signalType" label="情绪识别"  align="left" width="150">
-        </el-table-column>px
+        <el-table-column  prop="signalType" label="情绪识别"  align="left" width="150">
 
-        <el-table-column  label="编辑"  align="center" width="150">
+          <template slot-scope="scope">
+            <span v-if="scope.row.signalType==='风险信号'" style="color: green"> {{scope.row.signalType}}</span>
+            <span v-else style="color: red"> {{scope.row.signalType}}</span>
+
+          </template>
+
+        </el-table-column>
+
+        <el-table-column  label="编辑"  align="center" width="230">
+          <template slot-scope="scope">
+
+            <div style="display: inline-flex">
+              <div style="display: inline-flex">
+                <div v-if="scope.row.signalType">改为</div>
+                <span  v-if="scope.row.signalType==='风险信号'" style="color: red" @click="updateClick(scope.row)">积极 &nbsp</span>
+                <span v-else-if="scope.row.signalType==='积极信号'" style="color: green">风险 &nbsp</span>
+              </div>
+
+              <div> &nbsp删除 &nbsp</div>
+              <div> &nbsp撤销删除</div>
+            </div>
+
+
+          </template>
         </el-table-column>
 
       </el-table>
@@ -152,7 +174,7 @@
             publishAt: '1564454149749',
             label: '产业',
             title: '上海市普陀区金沙江路 1518 弄',
-            signalType:'风险信号',
+            signalType:'积极信号',
           }]
 
         }
@@ -165,7 +187,7 @@
       mounted:function(){
 
         this.defaultConfig();
-        // this.getAllData();
+        this.getAllData();
       },
 
       //监听input变化
@@ -189,6 +211,20 @@
       },
       methods: {
 
+        //修改
+        updateClick(obj){
+
+          alert(obj.title);
+
+        },
+        //删除
+        deleteClick(){
+
+        },
+        //撤销
+        undoClick(){
+
+        },
         getResetData(){
 
         },
@@ -215,14 +251,16 @@
           _this.listLoading = true
           this.$http({
             method: 'GET',
-            url: 'e/operate/suggestion/list',
-            params: {status: _this.activeName, ps: 10, cp: _this.currentPage},
+            url: '/signal/content/change/get?cp=1&ps=15',
+            params: {},
             headers: {'X-Requested-With': 'XMLHttpRequest'},
             body: {},
             emulateJSON: false
           }).then(function (result) {
 
-            _this.users = result.body.data.suggestList
+            // debugger
+
+            _this.users = result.body.data
             _this.hasNextPage = result.body.data.hasNextPage
             _this.currentPage = result.body.data.currentPage
             _this.listLoading = false
@@ -242,7 +280,7 @@
 
 </script>
 
-<style scoped>
+<style>
   .select_div_top{
     width: 60%;
     display: flex;
