@@ -36,7 +36,7 @@ module.exports = {
         }
       },
       '/signal': {
-        target: 'http://192.168.111.218:31001/',
+        target: 'http://semantic-api-service:31001/',
         changeOrigin: true,
         pathRewrite: {
           '^/signal': '/'

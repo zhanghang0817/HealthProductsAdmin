@@ -55,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="homeSignal.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="homeSignal.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/homeSignal.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
+            <state relative-caret-position="5010">
+              <caret line="334" column="25" selection-start-line="334" selection-start-column="18" selection-end-line="334" selection-end-column="25" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -76,20 +76,19 @@
                 <element signature="n#style#0;n#span#1;n#template#0;n#el-table-column#3;n#el-table#0;n#div#3;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#template#0;n#el-table-column#4;n#el-table#0;n#div#3;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#el-table-column#4;n#el-table#0;n#div#3;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#template#0;n#el-table-column#4;n#el-table#0;n#div#3;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#template#0;n#el-table-column#4;n#el-table#0;n#div#3;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="e#3768#4842#0" />
+                <element signature="n#style#0;n#div#1;n#el-dialog#0;n#div#3;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#el-dialog#0;n#div#3;n#div#0;n#template#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
+            <state relative-caret-position="351">
+              <caret line="59" column="16" lean-forward="true" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -125,36 +124,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>cen</find>
-      <find>查询</find>
-      <find>资金账号</find>
-      <find>getCenter</find>
-      <find>getSubCompany</find>
-      <find>fund_account_valu</find>
-      <find>fund_account_value</find>
-      <find>params.fundAccount</find>
-      <find>params</find>
-      <find>所有</find>
-      <find>type_options</find>
-      <find>startDate</find>
-      <find>TimeSpace</find>
       <find>appVersion</find>
       <find>createAt</find>
       <find>content</find>
       <find>osVersion</find>
       <find>users</find>
       <find>scope</find>
-      <find>hasProPage</find>
       <find>operate/suggestion/detail</find>
       <find>/jbg/gemantic/com</find>
       <find>listLoading</find>
-      <find>getAllData</find>
       <find>this.type_value</find>
       <find>dengtacj</find>
       <find>sqdl</find>
       <find>row-class-name</find>
       <find>tableRowClassName</find>
       <find>primary</find>
+      <find>deleteClick</find>
+      <find>undoClick</find>
+      <find>hasNextPage</find>
+      <find>signal_type_value</find>
+      <find>type_options</find>
+      <find>type_options_value</find>
+      <find>input_value</find>
+      <find>signal_type_options</find>
+      <find>defaultConfig</find>
+      <find>getResetData</find>
+      <find>updateData</find>
+      <find>getAllData</find>
+      <find>getSearchData</find>
+      <find>hasProPage</find>
+      <find>/signal</find>
     </findStrings>
     <replaceStrings>
       <replace>def_time</replace>
@@ -171,8 +170,8 @@
         <option value="$PROJECT_DIR$/src/views/Level2Coupon.vue" />
         <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/views/Home.vue" />
-        <option value="$PROJECT_DIR$/config/index.js" />
         <option value="$PROJECT_DIR$/src/views/homeSignal.vue" />
+        <option value="$PROJECT_DIR$/config/index.js" />
       </list>
     </option>
   </component>
@@ -195,7 +194,7 @@
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="877" />
@@ -317,7 +316,13 @@
       <workItem from="1564378663581" duration="9085000" />
       <workItem from="1564447258494" duration="13444000" />
       <workItem from="1564467845408" duration="5942000" />
-      <workItem from="1564487329653" duration="2769000" />
+      <workItem from="1564487329653" duration="3375000" />
+      <workItem from="1564535982869" duration="2228000" />
+      <workItem from="1564541758914" duration="1597000" />
+      <workItem from="1564971203836" duration="16741000" />
+      <workItem from="1565055978942" duration="2469000" />
+      <workItem from="1565062435698" duration="1961000" />
+      <workItem from="1565081254543" duration="196000" />
     </task>
     <task id="LOCAL-00001" summary="配置忽略文件">
       <created>1560997628313</created>
@@ -330,10 +335,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143441000" />
+    <option name="totallyTimeSpent" value="169239000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="877" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20014094" />
@@ -344,7 +349,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32948717" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49964765" visible="true" weight="0.15128206" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49964765" visible="true" weight="0.3576923" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -369,7 +374,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -659,13 +664,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/Video.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="134">
@@ -682,8 +680,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/homeSignal.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
+        <state relative-caret-position="5010">
+          <caret line="334" column="25" selection-start-line="334" selection-start-column="18" selection-end-line="334" selection-end-column="25" />
           <folding>
             <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -700,11 +698,17 @@
             <element signature="n#style#0;n#span#1;n#template#0;n#el-table-column#3;n#el-table#0;n#div#3;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#template#0;n#el-table-column#4;n#el-table#0;n#div#3;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#template#0;n#el-table-column#4;n#el-table#0;n#div#3;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#template#0;n#el-table-column#4;n#el-table#0;n#div#3;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#template#0;n#el-table-column#4;n#el-table#0;n#div#3;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="e#3768#4842#0" />
+            <element signature="n#style#0;n#div#1;n#el-dialog#0;n#div#3;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#el-dialog#0;n#div#3;n#div#0;n#template#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="59" column="16" lean-forward="true" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="16" />
         </state>
       </provider>
     </entry>
