@@ -90,7 +90,7 @@
 
             <div style="display: inline-flex">
               <div v-if="scope.row.preSignalType == undefined" style="display: inline-flex" >
-                <div v-if="scope.row.signalType">改为</div>
+                <div v-if="scope.row.signalType==='风险信号' || scope.row.signalType==='积极信号'">改为</div>
                 <span  v-if="scope.row.signalType==='风险信号'" style="color: red" @click="setUpCurrentData(scope.row,'修改')">积极 &nbsp</span>
                 <span  v-else-if="scope.row.signalType==='积极信号'" style="color: green" @click="setUpCurrentData(scope.row,'修改')">风险 &nbsp</span>
               </div>

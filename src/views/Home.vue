@@ -41,7 +41,7 @@
             <el-menu-item  index="1-2" @click="goPage('/GroupMage')" v-if="menuList.indexOf('grouping:view') == -1?false:true">分组管理</el-menu-item>
           </el-submenu>
           <el-menu-item index="7" @click="goPage('/level2coupon')" v-if="menuList.indexOf('level2coupon:view') == -1?false:true"><i class="fa fa-ticket"></i>Level2体验券管理</el-menu-item>
-          <el-menu-item index="8" @click="goPage('/homeSignal')"><i class="fa fa-ticket"></i>情绪识别修正</el-menu-item>
+          <el-menu-item index="8" @click="goPage('/homeSignal')" v-if="menuList.indexOf('homeSignal:view') == -1?false:true"><i class="fa fa-ticket"></i>情绪识别修正</el-menu-item>
         </el-menu>
 
       </aside>
@@ -147,6 +147,8 @@ export default {
         headers: {'X-Requested-With': 'XMLHttpRequest'},
         emulateJSON: true
       }).then(function (result) {
+
+        debugger
         _this.menuList = result.body.data
         localStorage.setItem('menuList', _this.menuList)
         if (_this.menuList.indexOf('subCompany:view') !== -1) {
