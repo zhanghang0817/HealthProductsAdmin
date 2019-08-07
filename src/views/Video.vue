@@ -25,6 +25,10 @@
             <el-option v-for="(item,index) in ruleForm2.columnList" :key="index" :label="item.name" :value="item.code"></el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="推送标题*" prop="pushTitle">
+          <el-input type="input" v-model="ruleForm2.pushTitle" auto-complete="off" class="iptWidth50" :maxlength="15"
+                    placeholder="请添加推送标题"></el-input>
+        </el-form-item>
         <el-form-item label="视频*" prop="vidio">
           <el-input type="input" v-model="ruleForm2.vidio" class="iptWidth50" placeholder="请输入视频地址"></el-input>
         </el-form-item>
@@ -85,6 +89,16 @@
           callback()
         }
       }
+      var validatePushTitle = (rule, value, callback) => {
+//        console.log(value)
+        if (value === '') {
+          callback(new Error('请输入推送标题'))
+        } else if (value.length > 15) {
+          callback(new Error('标题不能大于15个字符'))
+        } else {
+          callback()
+        }
+      }
       var validateColumn = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('请选择栏目'))
@@ -110,7 +124,8 @@
 //          vidioPic: '',
           column: '',
           columnList: '',
-          content: ''
+          content: '',
+          pushTitle:''
         },
         rules: {
           title: [
@@ -127,6 +142,9 @@
 //          ],
           source: [
             {validator: validateSource, trigger: 'blur'}
+          ],
+          pushTitle:[
+            {validator: validatePushTitle, trigger: 'blur'}
           ]
         },
         editorOption: {
@@ -210,7 +228,8 @@
             source: this.ruleForm2.source.trim(),
             columnCode: this.ruleForm2.column,
             videoUrl: this.ruleForm2.vidio,
-            articleContent: this.ruleForm2.content
+            articleContent: this.ruleForm2.content,
+            pushHeadline:this.ruleForm2.pushTitle
           },
           headers: {'X-Requested-With': 'XMLHttpRequest'},
           emulateJSON: false
@@ -337,6 +356,7 @@
           this.ruleForm2.title = result.data.data.title
           this.ruleForm2.column = result.data.data.columnCode
           this.ruleForm2.vidio = result.data.data.videoUrl
+          this.ruleForm2.pushTitle = result.data.data.pushHeadline
           this.activeName = 'second'
         }).catch(() => {
           this.$message.error('请重新登录')
