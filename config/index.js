@@ -35,6 +35,13 @@ module.exports = {
           '^/e': '/'
         }
       },
+      '/signal': {
+        target: 'http://semantic-api-service:31001/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/signal': '/'
+        }
+      },
       '/jbg/gemantic/com': {
         target: 'http://jbg.gemantic.com:8080',
         changeOrigin: true,
@@ -42,6 +49,7 @@ module.exports = {
           '^/jbg/gemantic/com': '/'
         }
       },
+
       '/dengtacj': {
         target: 'http://hczq.dengtacj.cn:55561',
         changeOrigin: true,
