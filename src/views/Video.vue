@@ -229,7 +229,7 @@
             columnCode: this.ruleForm2.column,
             videoUrl: this.ruleForm2.vidio,
             articleContent: this.ruleForm2.content,
-            pushHeadline:this.ruleForm2.pushTitle
+            pushHeadline: this.ruleForm2.pushTitle
           },
           headers: {'X-Requested-With': 'XMLHttpRequest'},
           emulateJSON: false
@@ -374,7 +374,8 @@
             source: this.ruleForm2.source,
             columnCode: this.ruleForm2.column,
             videoUrl: this.ruleForm2.vidio,
-            articleContent: this.ruleForm2.content
+            articleContent: this.ruleForm2.content,
+            pushHeadline: this.ruleForm2.pushTitle
           },
           headers: {'X-Requested-With': 'XMLHttpRequest'},
           emulateJSON: false
