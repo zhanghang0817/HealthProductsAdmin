@@ -78,7 +78,7 @@
           <el-input type="input" v-model="ruleForm2.audio" class="iptWidth50" placeholder="请选择文件"></el-input>
           <el-upload
             class="upload-demo uploadAudioBut clearfix"
-            action="http://10.0.0.22:10011/jbg/gemantic/com/music.do"
+            action="/jbg/gemantic/com/music.do"
             :on-preview="handlePreview"
             :on-remove="handleRemove"
             :on-success="handleSuccess"
