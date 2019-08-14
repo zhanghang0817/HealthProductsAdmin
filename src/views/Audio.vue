@@ -78,14 +78,16 @@
           <el-input type="input" v-model="ruleForm2.audio" class="iptWidth50" placeholder="请选择文件"></el-input>
           <el-upload
             class="upload-demo uploadAudioBut clearfix"
-            action="/jbg/gemantic/com/music.do"
+            action="http://10.0.0.22:10011/jbg/gemantic/com/music.do"
             :on-preview="handlePreview"
             :on-remove="handleRemove"
+            :on-success="handleSuccess"
             :before-upload="beforeAvatarUpload"
             :file-list="fileList">
             <el-button type="primary">点击上传</el-button>
             <div slot="tip" class="el-upload__tip uploadAudioFont fl">只能上传mp3文件，且不超过50MB</div>
           </el-upload>
+          <!--action="/jbg/gemantic/com/music.do"-->
           <!--<el-button @click="emptyAudio()">清空音频</el-button>-->
         </el-form-item>
         <el-form-item label="文章" class="editorHei500">
@@ -152,7 +154,8 @@
           column: '',
           columnList: '',
           content: '',
-          pushTitle: ''
+          pushTitle: '',
+          audio: ''
         },
         rules: {
           title: [
@@ -164,7 +167,7 @@
           source: [
             {validator: validateSource, trigger: 'blur'}
           ],
-          pushTitle:[
+          pushTitle: [
             {validator: validatePushTitle, trigger: 'blur'}
           ]
         },
@@ -440,11 +443,14 @@
         })
       },
       handleRemove (file, fileList) {
-//        console.log(file, fileList)
+        console.log(file, fileList)
       },
       handlePreview (file) {
-//        console.log('http://download.zq88.cn/' + file.response.path)
+        // console.log('http://download.zq88.cn/' + file.response.path)
         this.ruleForm2.audio = 'http://download.zq88.cn/' + file.response.path
+      },
+      handleSuccess (response, file, fileList) {
+        this.ruleForm2.audio = 'http://download.zq88.cn/' + response.path
       }
     },
     computed: {

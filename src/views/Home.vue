@@ -148,7 +148,6 @@ export default {
         emulateJSON: true
       }).then(function (result) {
 
-        debugger
         _this.menuList = result.body.data
         localStorage.setItem('menuList', _this.menuList)
         if (_this.menuList.indexOf('subCompany:view') !== -1) {
