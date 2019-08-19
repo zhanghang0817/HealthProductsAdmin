@@ -174,7 +174,7 @@
         editorOption: {
           // something config
         },
-        newsUrl: 'http://moblie.hczq.com/yzt/djgd_hearNewsDetail.html?id=', // 新闻跳转的url
+        newsUrl: '/h5/page/' + 'yzt/djgd_hearNewsDetail.html?id=', // 新闻跳转的url
         tablePs: '20',
         currentPage: '1', // 页码
         hasNextPage: false,
@@ -447,10 +447,10 @@
       },
       handlePreview (file) {
         // console.log('http://download.zq88.cn/' + file.response.path)
-        this.ruleForm2.audio = 'http://download.zq88.cn/' + file.response.path
+        this.ruleForm2.audio = '/download/' + file.response.path
       },
       handleSuccess (response, file, fileList) {
-        this.ruleForm2.audio = 'http://download.zq88.cn/' + response.path
+        this.ruleForm2.audio = '/download/' + response.path
       }
     },
     computed: {

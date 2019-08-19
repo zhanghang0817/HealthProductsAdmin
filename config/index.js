@@ -70,7 +70,21 @@ module.exports = {
         pathRewrite: {
           '^/analyse/hczq/home/': '/'
         }
-      }
+      },
+      '/download/': {
+        target: 'http://download.zq88.cn',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/download/': '/'
+        }
+      },
+      '/h5/page/': {
+        target: 'https://moblie.hczq.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/h5/page/': '/'
+        }
+      },
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

@@ -150,7 +150,7 @@
         editorOption: {
           // something config
         },
-        newsUrl: 'http://pre-mobile.rxhui.com/yzt/djgd_hearNewsDetail.html?id=', // 新闻跳转的url
+        newsUrl: '/h5/page/' + 'yzt/djgd_hearNewsDetail.html?id=', // 新闻跳转的url
         tablePs: '20',
         currentPage: '1', // 页码
         hasNextPage: false,
