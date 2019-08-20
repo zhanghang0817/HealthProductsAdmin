@@ -63,6 +63,7 @@
   import 'quill/dist/quill.bubble.css'
   import {quillEditor} from 'vue-quill-editor'
   import videoTable from '../components/table.vue'
+  import { getH5PageHost } from '../lib/hostUtil.js'
   export default {
     data () {
       var vidioSource = (rule, value, callback) => {
@@ -150,7 +151,7 @@
         editorOption: {
           // something config
         },
-        newsUrl: '/h5/page/' + 'yzt/djgd_hearNewsDetail.html?id=', // 新闻跳转的url
+        newsUrl: getH5PageHost() + '/yzt/djgd_hearNewsDetail.html?id=', // 新闻跳转的url
         tablePs: '20',
         currentPage: '1', // 页码
         hasNextPage: false,

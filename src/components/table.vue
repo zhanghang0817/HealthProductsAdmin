@@ -49,12 +49,14 @@
   </div>
 </template>
 <script>
+  import { getH5PageHost } from '../lib/hostUtil.js'
+
   export default{
     props: ['tableData1'],
     data () {
       return {
         menuList: [],
-        newsUrl: 'http://pre-mobile.rxhui.com/yzt/djgd_lookNewsDetail.html?id=' // 新闻跳转的url
+        newsUrl: getH5PageHost() + '/yzt/djgd_lookNewsDetail.html?id=' // 新闻跳转的url
       }
     },
     methods: {

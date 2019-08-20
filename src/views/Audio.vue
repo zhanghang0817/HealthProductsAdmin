@@ -108,6 +108,7 @@
   import 'quill/dist/quill.snow.css'
   import 'quill/dist/quill.bubble.css'
   import { quillEditor } from 'vue-quill-editor'
+  import { getDownloadHost , getH5PageHost } from '../lib/hostUtil.js'
   export default {
     data () {
       var validateTitle = (rule, value, callback) => {
@@ -174,7 +175,7 @@
         editorOption: {
           // something config
         },
-        newsUrl: '/h5/page/' + 'yzt/djgd_hearNewsDetail.html?id=', // 新闻跳转的url
+        newsUrl: getH5PageHost() + '/yzt/djgd_hearNewsDetail.html?id=', // 新闻跳转的url
         tablePs: '20',
         currentPage: '1', // 页码
         hasNextPage: false,
@@ -447,10 +448,10 @@
       },
       handlePreview (file) {
         // console.log('http://download.zq88.cn/' + file.response.path)
-        this.ruleForm2.audio = '/download/' + file.response.path
+        this.ruleForm2.audio = getDownloadHost() + '/' + file.response.path
       },
       handleSuccess (response, file, fileList) {
-        this.ruleForm2.audio = '/download/' + response.path
+        this.ruleForm2.audio = getDownloadHost() + '/' + response.path
       }
     },
     computed: {
