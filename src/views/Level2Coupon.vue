@@ -93,13 +93,31 @@
       </div>
     </el-row>
 
-    <el-row style="margin-top: 40px;margin-bottom: 40px">
+    <el-row style="margin-top: 40px">
       <div><span style="color: red">统计：</span><span>{{descStr}}</span></div>
+    </el-row>
+
+    <el-row v-if="menuList.indexOf('level2coupon:manual') == -1?false:true">
+      <el-upload
+        class="upload-demo uploadBtn"
+        ref="upload"
+        action="e/operate/quota/coupon/manual"
+        :on-change="onchangeFunc"
+        :on-remove="handleRemove"
+        :on-success="handleSuccess"
+        :before-upload="beforeAvatarUpload"
+        :limit="1"
+        :auto-upload="true"
+        :file-list="fileList">
+        <el-button slot="trigger" size="small" type="primary">导入资金账号</el-button>
+        <!--<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>-->
+        <div slot="tip" class="el-upload__tip">上传文件限制为txt格式，导入后将立即发送优惠券，请确保数据无误</div>
+      </el-upload>
     </el-row>
 
     <el-table
       :data="tableData"
-      style="width: 100%;text-align: center"
+      style="width: 100%;text-align: center;margin-top: 40px"
       height="600"
     >
       <el-table-column
@@ -240,6 +258,9 @@
         }, {
           value: '8',
           label: '新开期权账户'
+        }, {
+          value: '100',
+          label: '投票送券'
         }],
         type_value: '',
 
@@ -265,10 +286,102 @@
         getStatus_value: '',
 
         tableData: [],
-        departmentName: '所有营业部'
+        departmentName: '所有营业部',
+
+        fileList: [], // 上传文件列表
       };
     },
     methods: {
+      handleRemove(file, fileList) {
+        this.fileList = fileList;
+      },
+
+      onchangeFunc(file, fileList) {
+        this.fileList = fileList;
+      },
+      // 上传音频限制
+      beforeAvatarUpload(file) {
+//        console.log(file)
+        let isTXT
+        if (navigator.userAgent.indexOf('Firefox') > -1) {
+          isTXT = /\.(txt)$/.test(file.name)
+//          console.log(isJPG)
+        } else {
+          isTXT = file.type === 'text/plain'
+        }
+        if (!isTXT) {
+          this.$message.error('文件只能是txt格式!')
+        }
+//        this.$confirm('确定上传并给用户发送优惠券？', '提示', {
+//          confirmButtonText: '确定',
+//          cancelButtonText: '取消',
+//          type: 'warning',
+//        }).then(() => {
+//          this.$message({
+//            type: 'success',
+//            message: '确认上传',
+//          });
+//          if (!isTXT) {
+//            this.$message.error('文件只能是txt格式!')
+//          }
+//          return isTXT
+//        }).catch(() => {
+//          this.$message({
+//            type: 'info',
+//            message: '取消上传'
+//          });
+//          return false
+//        });
+        return isTXT
+      },
+
+      submitUpload:function() {
+        if (this.fileList && this.fileList.length > 0) {
+          this.open();
+        } else {
+          this.alert();
+        }
+      },
+
+      alert:function() {
+        this.$alert('请先选择上传文件！', {
+          confirmButtonText: '确定',
+        });
+      },
+
+      execUpload: function() {
+        this.$refs.upload.submit();
+      },
+
+      open :function() {
+        this.$confirm('确定上传并给用户发送优惠券？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '确认上传',
+          });
+          this.execUpload();
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消上传'
+          });
+        });
+      },
+      handleSuccess:function(response, file, fileList) {
+        //默认选定 网络投票，后期新增其他类型需要改动
+        this.type_value = this.type_options[9].value;
+        this.$refs.upload.clearFiles();
+        this.$notify({
+          title: '成功',
+          message: '文件上传成功！稍后请查询',
+          type: 'success'
+        });
+      },
+
       assembleQueryParams: function () {
         var params = {};
         var startDate = this.TimeSpace[0];
@@ -311,7 +424,7 @@
           }
         });
 
-        if(!this.isEmpty(sales_name) && !this.isEmpty(branch_name)){
+        if (!this.isEmpty(sales_name) && !this.isEmpty(branch_name)) {
           this.departmentName = sales_name + '--' + branch_name;
         } else {
           this.departmentName = '所有营业部';
@@ -377,7 +490,7 @@
           var unreceivedExpiresNum = data.unreceivedExpiresNum;
           var unusedExpiresNum = data.unusedExpiresNum;
           if (data.currentPage == 1) {
-            this.descStr = this.departmentName + '，已发：' + totalNum + '，已领取：' + receivedNum + '，已使用：' + usedNum + '，已过期（未使用）：' + unusedExpiresNum+',已失效（未领取）：'+unreceivedExpiresNum;
+            this.descStr = this.departmentName + '，已发：' + totalNum + '，已领取：' + receivedNum + '，已使用：' + usedNum + '，已过期（未使用）：' + unusedExpiresNum + ',已失效（未领取）：' + unreceivedExpiresNum;
           }
           if (data.infos) {
             for (var i = 0; i < data.infos.length; i++) {
@@ -569,4 +682,9 @@
     text-align: right;
     padding-right: 30px;
   }
+
+  .uploadBtn {
+    padding-top: 20px;
+  }
+
 </style>
