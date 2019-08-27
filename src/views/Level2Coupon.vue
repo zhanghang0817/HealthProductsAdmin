@@ -175,10 +175,10 @@
 
 <script>
   export default {
-    data() {
-      var currentDate = new Date();
-      var month = currentDate.getMonth();
-      var startDate = new Date();
+    data () {
+      var currentDate = new Date()
+      var month = currentDate.getMonth()
+      var startDate = new Date()
       startDate.setMonth(month - 1)
       return {
         menuList: [],    // 获取权限
@@ -266,95 +266,94 @@
 
         tableData: [],
         departmentName: '所有营业部'
-      };
+      }
     },
     methods: {
       assembleQueryParams: function () {
-        var params = {};
-        var startDate = this.TimeSpace[0];
-        startDate.setHours(0);
-        startDate.setMinutes(0);
-        startDate.setSeconds(0);
-        var startAt = startDate.getTime();
-        params.startAt = startAt;
+        var params = {}
+        var startDate = this.TimeSpace[0]
+        startDate.setHours(0)
+        startDate.setMinutes(0)
+        startDate.setSeconds(0)
+        var startAt = startDate.getTime()
+        params.startAt = startAt
 
-        var endDate = this.TimeSpace[1];
-        endDate.setHours(23);
-        endDate.setMinutes(59);
-        endDate.setSeconds(59);
-        var endAt = endDate.getTime();
-        params.endAt = endAt;
-        var fund_account_value = this.fund_account_value;
+        var endDate = this.TimeSpace[1]
+        endDate.setHours(23)
+        endDate.setMinutes(59)
+        endDate.setSeconds(59)
+        var endAt = endDate.getTime()
+        params.endAt = endAt
+        var fund_account_value = this.fund_account_value
         if (!this.isEmpty(fund_account_value)) {
-          params.fundAccount = fund_account_value;
+          params.fundAccount = fund_account_value
         }
 
-        var sales_value = this.sales_value;
-        var sales_name = '';
+        var sales_value = this.sales_value
+        var sales_name = ''
         this.sales_options.map(function (value) {
           if (value.value == sales_value) {
-            if (value.value !== "all") {
-              params.deptSerialNo = value.value;
-              sales_name = value.label;
+            if (value.value !== 'all') {
+              params.deptSerialNo = value.value
+              sales_name = value.label
             }
           }
-        });
+        })
 
-        var branch_value = this.branch_value;
-        var branch_name = '';
+        var branch_value = this.branch_value
+        var branch_name = ''
         this.branch_options.map(function (value) {
           if (value.value == branch_value) {
-            if (value.value !== "all") {
-              params.subDeptSerialNo = value.value;
-              branch_name = value.label;
+            if (value.value !== 'all') {
+              params.subDeptSerialNo = value.value
+              branch_name = value.label
             }
           }
-        });
+        })
 
-        if(!this.isEmpty(sales_name) && !this.isEmpty(branch_name)){
-          this.departmentName = sales_name + '--' + branch_name;
+        if (!this.isEmpty(sales_name) && !this.isEmpty(branch_name)) {
+          this.departmentName = sales_name + '--' + branch_name
         } else {
-          this.departmentName = '所有营业部';
+          this.departmentName = '所有营业部'
         }
 
-
-        var validityTime_value = this.validityTime_value;
+        var validityTime_value = this.validityTime_value
         this.validityTime_options.map(function (value) {
           if (value.value == validityTime_value) {
-            if (value.value !== "all") {
-              params.couponTerm = value.value;
+            if (value.value !== 'all') {
+              params.couponTerm = value.value
             }
           }
-        });
+        })
 
-        var type_value = this.type_value;
+        var type_value = this.type_value
         this.type_options.map(function (value) {
           if (value.value == type_value) {
-            if (value.value !== "all") {
-              params.couponType = value.value;
+            if (value.value !== 'all') {
+              params.couponType = value.value
             }
-
           }
-        });
+        })
 
-        var getStatus_value = this.getStatus_value;
+        var getStatus_value = this.getStatus_value
         this.getStatus_options.map(function (value) {
           if (value.value == getStatus_value) {
-            if (value.value !== "all") {
-              params.status = value.value;
+            if (value.value !== 'all') {
+              params.status = value.value
             }
           }
-        });
-        return params;
-      }, getCouponsData: function (cp) {
-        var params = this.assembleQueryParams();
+        })
+        return params
+      },
+      getCouponsData: function (cp) {
+        var params = this.assembleQueryParams()
         if (cp && !isNaN(cp)) {
-          params.cp = cp;
+          params.cp = cp
         }
-        params.ps = 20;
-        this.tableData = [];
+        params.ps = 20
+        this.tableData = []
 
-        var path = 'quota/coupon/info';
+        var path = 'quota/coupon/info'
         this.$http({
           method: 'GET',
           url: 'e/operate/' + path,
@@ -362,81 +361,79 @@
           headers: {'X-Requested-With': 'XMLHttpRequest'},
           emulateJSON: true
         }).then(function (result) {
-          var data = result.body.data;
-          if (!data) return;
-          this.hasNextPage = data.hasNextPage;
-          this.currentPage = data.currentPage;
+          var data = result.body.data
+          if (!data) return
+          this.hasNextPage = data.hasNextPage
+          this.currentPage = data.currentPage
           if (data.currentPage == 1) {
-            this.hasProPage = true;
+            this.hasProPage = true
           } else {
-            this.hasProPage = false;
+            this.hasProPage = false
           }
-          var totalNum = data.totalNum;
-          var receivedNum = data.receivedNum;
-          var usedNum = data.usedNum;
-          var unreceivedExpiresNum = data.unreceivedExpiresNum;
-          var unusedExpiresNum = data.unusedExpiresNum;
+          var totalNum = data.totalNum
+          var receivedNum = data.receivedNum
+          var usedNum = data.usedNum
+          var unreceivedExpiresNum = data.unreceivedExpiresNum
+          var unusedExpiresNum = data.unusedExpiresNum
           if (data.currentPage == 1) {
-            this.descStr = this.departmentName + '，已发：' + totalNum + '，已领取：' + receivedNum + '，已使用：' + usedNum + '，已过期（未使用）：' + unusedExpiresNum+',已失效（未领取）：'+unreceivedExpiresNum;
+            this.descStr = this.departmentName + '，已发：' + totalNum + '，已领取：' + receivedNum + '，已使用：' + usedNum + '，已过期（未使用）：' + unusedExpiresNum + ',已失效（未领取）：' + unreceivedExpiresNum
           }
           if (data.infos) {
             for (var i = 0; i < data.infos.length; i++) {
-              var info = data.infos[i];
-              var item = {};
-              item.date = info.createAt ? this.formatTime("yyyy-MM-dd \r\n hh:mm:ss", new Date(+info.createAt)) : '-';
-              item.fund_account = info.fundAccount;
-              item.branch = info.deptName;
-              item.sales = info.subDeptName;
+              var info = data.infos[i]
+              var item = {}
+              item.date = info.createAt ? this.formatTime('yyyy-MM-dd \r\n hh:mm:ss', new Date(+info.createAt)) : '-'
+              item.fund_account = info.fundAccount
+              item.branch = info.deptName
+              item.sales = info.subDeptName
 
               this.type_options.map(function (value) {
                 if (value.value == info.couponType) {
-                  item.type = value.label;
-                }
-              });
-
-              this.validityTime_options.map(function (value) {
-                if (value.value == info.couponTerm) {
-                  item.validity_time = value.label;
-                }
-              });
-
-              this.getStatus_options.map(function (value) {
-                if (value.value == info.status) {
-                  item.state = value.label;
+                  item.type = value.label
                 }
               })
 
-              item.phone = info.phone ? info.phone : '-';
+              this.validityTime_options.map(function (value) {
+                if (value.value == info.couponTerm) {
+                  item.validity_time = value.label
+                }
+              })
 
-              item.get_time = info.receiveAt ? this.formatTime("yyyy-MM-dd \r\n hh:mm:ss", new Date(+info.receiveAt)) : '-';
-              item.use_time = info.usedAt ? this.formatTime("yyyy-MM-dd \r\n hh:mm:ss", new Date(+info.usedAt)) : '-';
-              this.tableData.push(item);
+              this.getStatus_options.map(function (value) {
+                if (value.value == info.status) {
+                  item.state = value.label
+                }
+              })
+
+              item.phone = info.phone ? info.phone : '-'
+
+              item.get_time = info.receiveAt ? this.formatTime('yyyy-MM-dd \r\n hh:mm:ss', new Date(+info.receiveAt)) : '-'
+              item.use_time = info.usedAt ? this.formatTime('yyyy-MM-dd \r\n hh:mm:ss', new Date(+info.usedAt)) : '-'
+              this.tableData.push(item)
             }
           }
-
         })
       },
 
       queryBranch: function (value) {
         if (value === 'all' || value === '所有') {
-          this.branch_selected = true;
-          this.branch_options = [];
-          this.branch_value = '';
+          this.branch_selected = true
+          this.branch_options = []
+          this.branch_value = ''
         } else {
-          this.branch_selected = false;
-          this.getData('quota/coupon/branchInfo', value);
+          this.branch_selected = false
+          this.getData('quota/coupon/branchInfo', value)
         }
-
       },
 
       getBranchInfo: function () {
-        this.getData('quota/coupon/branchInfo');
+        this.getData('quota/coupon/branchInfo')
       },
 
-      getData(path, branchNo) {
-        var params = {};
+      getData (path, branchNo) {
+        var params = {}
         if (branchNo) {
-          params.upBranchNo = branchNo;
+          params.upBranchNo = branchNo
         }
         ;
         this.$http({
@@ -446,21 +443,21 @@
           emulateJSON: true,
           params: params
         }).then(function (result) {
-          var arrays;
+          var arrays
           if (branchNo) {
-            this.branch_options = [];
-            arrays = this.branch_options;
+            this.branch_options = []
+            arrays = this.branch_options
           } else {
-            arrays = this.sales_options;
+            arrays = this.sales_options
           }
 
-          var data = result.body.data;
+          var data = result.body.data
           for (var i = 0; i < data.length; i++) {
-            var item = data[i];
-            var option = {};
-            option.value = item.branchNo;
-            option.label = item.branchName;
-            arrays.push(option);
+            var item = data[i]
+            var option = {}
+            option.value = item.branchNo
+            option.label = item.branchName
+            arrays.push(option)
           }
 
           if (branchNo) {
@@ -469,57 +466,55 @@
             }
           } else {
             var option = {}
-            option.value = 'all';
-            option.label = '所有';
-            arrays.unshift(option);
-            this.sales_value = this.sales_options[0].value;
-            //查询当前选中状态的优惠券数据
-            this.getCouponsData();
+            option.value = 'all'
+            option.label = '所有'
+            arrays.unshift(option)
+            this.sales_value = this.sales_options[0].value
+          // 查询当前选中状态的优惠券数据
+            this.getCouponsData()
           }
-
         })
       },
 
       exportExcel: function () {
-        var path = 'quota/coupon/csv?';
+        var path = 'quota/coupon/csv?'
         var params = this.assembleQueryParams()
         for (var prop in params) {
-          path += prop + '=' + params[prop] + '&';
+          path += prop + '=' + params[prop] + '&'
         }
-        path = path.substr(0, path.length - 1);
-        window.open('e/operate/' + path);
+        path = path.substr(0, path.length - 1)
+        window.open('e/operate/' + path)
       },
 
       formatTime: function (fmt, date) {
         if (date == null || !date) {
           return '-'
         }
-        //格式化时间
+        // 格式化时间
         var o = {
-          "M+": date.getMonth() + 1,                 //月份
-          "d+": date.getDate(),                    //日
-          "h+": date.getHours(),                   //小时
-          "m+": date.getMinutes(),                 //分
-          "s+": date.getSeconds(),                 //秒
-        };
+          'M+': date.getMonth() + 1,                 // 月份
+          'd+': date.getDate(),                    // 日
+          'h+': date.getHours(),                   // 小时
+          'm+': date.getMinutes(),                 // 分
+          's+': date.getSeconds()                 // 秒
+        }
         if (/(y+)/.test(fmt)) {
-          fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+          fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
         }
         for (var k in o) {
-          if (new RegExp("(" + k + ")").test(fmt)) {
-            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+          if (new RegExp('(' + k + ')').test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
           }
         }
-        return fmt;
+        return fmt
       },
 
-
-      //判断字符是否为空的方法
+      // 判断字符是否为空的方法
       isEmpty: function (obj) {
-        if (typeof obj == "undefined" || obj == null || obj == "") {
-          return true;
+        if (typeof obj === 'undefined' || obj == null || obj == '') {
+          return true
         } else {
-          return false;
+          return false
         }
       },
 
@@ -533,34 +528,33 @@
       },
 
       reset: function () {
-        var currentDate = new Date();
-        var month = currentDate.getMonth();
-        var startDate = new Date();
-        startDate.setMonth(month - 1);
-        this.descStr = '************************';
-        this.currentPage = 1;
-        this.hasNextPage = false;
-        this.hasProPage = false;
-        this.TimeSpace = [startDate, currentDate];
-        this.fund_account_value = '';
-        this.getStatus_value = this.getStatus_options[0].value;
-        this.type_value = this.type_options[0].value;
-        this.validityTime_value = this.validityTime_options[0].value;
-        this.sales_value = this.sales_options[0].value;
-        this.branch_value = '';
-        this.getCouponsData(this.currentPage);
+        var currentDate = new Date()
+        var month = currentDate.getMonth()
+        var startDate = new Date()
+        startDate.setMonth(month - 1)
+        this.descStr = '************************'
+        this.currentPage = 1
+        this.hasNextPage = false
+        this.hasProPage = false
+        this.TimeSpace = [startDate, currentDate]
+        this.fund_account_value = ''
+        this.getStatus_value = this.getStatus_options[0].value
+        this.type_value = this.type_options[0].value
+        this.validityTime_value = this.validityTime_options[0].value
+        this.sales_value = this.sales_options[0].value
+        this.branch_value = ''
+        this.getCouponsData(this.currentPage)
       }
 
     },
     mounted: function () {
-      this.menuList = localStorage.menuList;
-      this.getBranchInfo();
-      this.getStatus_value = this.getStatus_options[0].value;
-      this.type_value = this.type_options[0].value;
-      this.validityTime_value = this.validityTime_options[0].value;
+      this.menuList = localStorage.menuList
+      this.getBranchInfo()
+      this.getStatus_value = this.getStatus_options[0].value
+      this.type_value = this.type_options[0].value
+      this.validityTime_value = this.validityTime_options[0].value
     }
-  };
-
+  }
 
 </script>
 
