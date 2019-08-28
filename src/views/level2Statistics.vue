@@ -116,30 +116,53 @@
                 v-loading = 'listLoading'
                 style="margin-top: 30px"
                 >
-        <el-table-column align="center"
-                         v-for="{ prop, label } in colConfigs"
-                         :key="prop"
-                         :prop="prop"
-                         :label="label">
+<!--        <el-table-column align="center"-->
+<!--                         v-for="{ prop, label } in colConfigs"-->
+<!--                         :key="prop"-->
+<!--                         :prop="prop"-->
+<!--                         :label="label">-->
+<!--          <template slot-scope="scope">-->
+<!--            <span v-if="scope.row.totalCount" style="color:blue" @click="showDetailPage(1)">{{scope.totalCount}}</span>-->
+
+<!--            <span v-if="scope.row.key === 'deptName'">scope.deptName</span>-->
+<!--            <span v-if="scope.row.key === 'subDeptName'">{{scope.subDeptName}}</span>-->
+<!--            <span v-if="scope.row.key === 'payway'">{{scope.payway}}</span>-->
+<!--            <span v-if="scope.row.key === 'orderTermName'">{{scope.orderTermName}}</span>-->
+<!--            <span v-if="scope.row.key === 'totalCount'" style="color:blue" @click="showDetailPage(1)">{{scope.totalCount}}</span>-->
+<!--          </template>-->
+<!--        </el-table-column>-->
+
+        <el-table-column
+                    align="center"
+                    :label = this.type_options_value >
           <template slot-scope="scope">
-            <span v-if="scope.prop"></span>
-            <span v-if="scope.prop === 'totalCount'" style="color:blue" @click="showDetailPage(1)"></span>
+            <span v-if="scope.row.deptName">{{scope.row.deptName}}</span>
+            <span v-else-if="scope.row.subDeptName">{{scope.row.subDeptName}}</span>
+            <span v-else-if="scope.row.payway === 0">微信支付</span>
+            <span v-else-if="scope.row.payway === 1">证联支付</span>
+            <span v-else-if="scope.row.payway === 2">优惠券支付</span>
+            <span v-else-if="scope.row.payway === 9">其他支付</span>
+            <span v-else-if="scope.row.orderTermName">{{scope.row.orderTermName}}</span>
+
+<!--            <span v-if="this.requestParams.statisticsParam === 'deptName'">{{scope.row.deptName}}</span>-->
+<!--            <span v-else-if="this.requestParams.statisticsParam === 'subDeptName'">{{scope.row.subDeptName}}</span>&ndash;&gt;-->
+            <!--            <span v-else-if="this.requestParams.statisticsParam === 'payway' && scope.row.payway === 0">微信支付</span>-->
+            <!--            <span v-else-if="this.requestParams.statisticsParam === 'payway' && scope.row.payway === 1">证联支付</span>-->
+            <!--            <span v-else-if="this.requestParams.statisticsParam === 'payway' && scope.row.payway === 2">优惠券支付</span>-->
+            <!--            <span v-else-if="this.requestParams.statisticsParam === 'payway' && scope.row.payway === 9">其他支付</span>-->
+            <!--            <span v-else-if="this.requestParams.statisticsParam === 'orderTermName'">{{scope.row.orderTermName}}</span>-->
           </template>
         </el-table-column>
-
-<!--        <el-table-column v-if="this.requestParams.statisticsParam === 'deptName'">-->
-<!--        </el-table-column>-->
-<!--        <el-table-column align="center"-->
-<!--                         prop="totalCount"-->
-<!--                         label="用户数">-->
-<!--        </el-table-column>-->
+        <el-table-column align="center"
+                         prop="totalCount"
+                         label="用户数">
+          <template slot-scope="scope">
+          <span  style="color:blue" @click="showDetailPage(scope.row)">{{scope.row.totalCount}}</span>
+          </template>
+        </el-table-column>
       </el-table>
 
-      <div class="block" style="float:right;margin:10px 18px">
-        <el-button type="primary" :disabled="!hasProPage" @click="nextPage('-1')">上一页</el-button>
-        第{{currentPage}}页
-        <el-button type="primary" :disabled="!hasNextPage" @click="nextPage('1')">下一页</el-button>
-      </div>
+
     </div>
     <div v-show="showDetail">
       <div style="display: inline-flex">
@@ -323,6 +346,12 @@
         </el-table>
       </el-col>
     </div>
+
+    <div class="block" style="float:right;margin:10px 18px">
+      <el-button type="primary" :disabled="!hasProPage" @click="nextPage('-1')">上一页</el-button>
+      第{{currentPage}}页
+      <el-button type="primary" :disabled="!hasNextPage" @click="nextPage('1')">下一页</el-button>
+    </div>
   </div>
 
 </template>
@@ -365,7 +394,10 @@
           showDetail: true,
           datas: '',
           currentPage: 1,
-          ps: 20,
+          historyCp: '',
+          historyHasNp: '',
+          historyHasPp: '',
+          // ps: 20,
           paramYear: '',
           paramMonth: '',
           paramSeason: '',
@@ -373,9 +405,11 @@
           hasProPage: false,
           listLoading: false,
           requestParams: {
-            statisticsParam: 'deptName'
+            statisticsParam: 'deptName',
+            ps: 20
           },
-          columnConfig: []
+          columnConfig: [],
+          itemId: ''
           // colConfigs: [{
           //   prop: this.requestParams.statisticsParam,
           //   label: this.type_options_value
@@ -480,6 +514,8 @@
         getSearchData () {
           let _this = this
           _this.listLoading = true
+          _this.colConfigs = undefined
+          _this.datas = undefined
           this.$http({
             method: 'GET',
             url: 'e/operate/quota/l2/statistics',
@@ -488,22 +524,43 @@
             body: {},
             emulateJSON: false
           }).then(function (result) {
-            // _this.datas = result.body.data.groupInfos
+            // var r = result.body.data.groupInfos
+            // for (let i = 0; i < r.length; i++) {
+            //   var a = r[i];
+            //   if (a.payway){
+            //     switch (a.payway) {
+            //       case 0:
+            //         a.pay = '微信支付'
+            //         break;
+            //       case 1:
+            //         a.pay = '证联支付'
+            //         break;
+            //       case 2:
+            //         a.pay = '优惠券支付'
+            //         break;
+            //       case 9:
+            //         a.pay = '其他支付'
+            //         break;
+            //     }
+            //   }
+            // }
+            _this.datas = result.body.data.groupInfos
+            this.$refs.tab.label = _this.type_options_value
+
             _this.currentPage = result.body.data.currentPage
             _this.hasNextPage = result.body.data.hasNextPage
             _this.listLoading = false
             // _this.showResult(_this.datas)
             _this.colConfigs = [{
-                prop: this.requestParams.statisticsParam,
-                label: this.type_options_value
-              }, {
-                prop: 'totalCount',
-                label: '用户数'}
-              ]
+              prop: this.requestParams.statisticsParam,
+              label: (this.type_options_value === '中心分公司' ? '中心营业部/分公司' : this.type_options_value)
+            }, {
+              prop: 'totalCount',
+              label: '用户数'}
+            ]
           }).catch(() => {
             _this.$message.error('获取数据失败')
             _this.listLoading = false
-
           })
         },
         nextPage (p) {
@@ -521,13 +578,59 @@
           this.requestParams.cp = this.currentPage
           this.getSearchData()
         },
-        showDetailPage (id) {
+        showDetailPage (item) {
           this.showStatistics = false
           this.showDetail = true
+          this.requestParams.deptSerialNo = undefined
+          this.requestParams.subDeptSerialNo = undefined
+          this.requestParams.payway = undefined
+          this.requestParams.orderTerm = undefined
+          if (this.type_options_value === '中心分公司') {
+              // this.itemId = item.deptSerialNo
+            this.requestParams.deptSerialNo = item.deptSerialNo
+          } else if (this.type_options_value === '子营业部') {
+              // this.itemId = item.subDeptSerialNo
+            this.requestParams.subDeptSerialNo = item.subDeptSerialNo
+          } else if (this.type_options_value === '支付方式') {
+              // this.itemId = item.payway
+            this.requestParams.payway = item.payway
+          } else if (this.type_options_value === '商品名称') {
+              // this.itemId = item.orderTerm
+            this.requestParams.orderTerm = item.orderTerm
+          }
+          this.historyCp = this.currentPage
+          this.historyHasNp = this.hasNextPage
+          this.historyHasPp = this.hasProPage
+          this.currentPage = 1
+          this.requestParams.cp = this.currentPage
+          this.getDetailPage()
+        },
+        getDetailPage () {
+          let _this = this
+          _this.listLoading = true
+          this.$http({
+            method: 'GET',
+            url: 'e/operate/quota/l2/info',
+            params: this.requestParams,
+            headers: {'X-Requested-With': 'XMLHttpRequest'},
+            body: {},
+            emulateJSON: false
+          }).then(function (result) {
+            _this.users = result.body.data.infos
+            _this.currentPage = result.body.data.currentPage
+            _this.hasNextPage = result.body.data.hasNextPage
+            _this.listLoading = false
+          }).catch(() => {
+            _this.$message.error('获取数据失败')
+            _this.listLoading = false
+          })
         },
         backToStatisticPage () {
           this.showStatistics = true
           this.showDetail = false
+          this.currentPage = this.historyCp
+          this.hasProPage = this.historyHasPp
+          this.hasNextPage = this.historyHasNp
         },
         exportData () {
           var path = 'quota/l2/csv?'
