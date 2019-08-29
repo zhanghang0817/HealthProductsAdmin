@@ -65,7 +65,7 @@
       label="权限（服务）开始时间"
       width="210">
         <template slot-scope="scope">
-          {{scope.row.serviceStartAt | timeDateChange}}
+          {{scope.row.serviceStartAt | timeDateFormatChange}}
         </template>
     </el-table-column>
       <el-table-column
@@ -74,7 +74,7 @@
         label="权限（服务）结束时间"
         width="210">
         <template slot-scope="scope">
-          {{scope.row.serviceEndAt | timeDateChange}}
+          {{scope.row.serviceEndAt | timeDateFormatChange}}
         </template>
       </el-table-column>
       <el-table-column
@@ -231,7 +231,6 @@
           this.requestParams.ps = 20
         },
         getSearchData () {
-          // this.defaultConfig()
           this.getAllData()
         },
         getAllData () {
@@ -300,7 +299,7 @@
         //       this.requestParams.phone = this.input_value
         //     }
         //   }, 500)
-        },
+        }
       }
     }
 </script>

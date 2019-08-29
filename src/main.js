@@ -42,6 +42,18 @@ Vue.filter('timeDateChange', function (nS) {
   // var s = date.getSeconds()
   return Y + M + D + h + m
 })
+
+Vue.filter('timeDateFormatChange', function (nS) {
+  if (!nS || isNaN(nS)) {
+    return ''
+  }
+  var date = new Date(parseInt(nS))
+  var Y = date.getFullYear() + '-'
+  var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+  var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' '
+  return Y + M + D
+})
+
 // 处理状态转化
 Vue.filter('dealStatus', function (st) {
   switch (st) {
