@@ -2,7 +2,7 @@
   <div>
     <div v-show="showStatistics">
       <el-row>
-        <el-col :span="9">
+        <el-col :span="7">
           <span class="demonstration" style="color:red">*</span>
           <span class="demonstration"> 选择时间：</span>
           <el-select v-model="type_time_value" placeholder="请选择" style="width: 180px">
@@ -374,7 +374,6 @@
           historyCp: '',
           historyHasNp: '',
           historyHasPp: '',
-          // ps: 20,
           paramYear: '',
           paramMonth: '',
           paramSeason: '',
@@ -555,7 +554,7 @@
           if (this.type_options_value === '中心分公司') {
               // this.itemId = item.deptSerialNo
             this.requestParams.deptSerialNo = item.deptSerialNo
-          } else if (this.type_options_value === '子营业部') {
+          } else if (this.type_options_value === '营业部') {
               // this.itemId = item.subDeptSerialNo
             this.requestParams.subDeptSerialNo = item.subDeptSerialNo
           } else if (this.type_options_value === '支付方式') {
@@ -608,7 +607,6 @@
           var path = 'quota/l2/csv?'
           var params = this.requestParams
           for (var prop in params) {
-            // eslint-disable-next-line eqeqeq
             if (params[prop] != undefined) {
               path += prop + '=' + params[prop] + '&'
             }

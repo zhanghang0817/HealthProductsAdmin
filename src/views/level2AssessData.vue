@@ -18,7 +18,6 @@
     <el-table
       :data="users"
       style="width: 100%;text-align: center"
-      border = 'true'
       v-loading = 'listLoading'>
       <el-table-column
         align="center"
@@ -262,7 +261,9 @@
           var path = 'quota/l2/csv?'
           var params = this.requestParams
           for (var prop in params) {
-            path += prop + '=' + params[prop] + '&'
+            if (params[prop] != undefined) {
+              path += prop + '=' + params[prop] + '&'
+            }
           }
           path = path.substr(0, path.length - 1)
           window.open('e/operate/' + path)
@@ -289,6 +290,9 @@
           this.input_value = ''
           this.requestParams.phone = undefined
           this.requestParams.fundAccount = undefined
+          this.currentPage = 1
+          this.requestParams.cp = this.currentPage
+          this.hasProPage = false
         },
         input_value (curVal, oldVal) {
         //   clearTimeout(this.timeout)
