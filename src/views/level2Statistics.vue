@@ -109,7 +109,7 @@
             :value="item.value">
           </el-option>
         </el-select>
-        <el-button type="primary" @click="getSearchData()">查询</el-button>
+        <el-button style="margin-left: 25px" type="primary" @click="getSearchData()">查询</el-button>
       </div>
 
       <el-table :data="datas"
@@ -203,7 +203,7 @@
             label="权限（服务）开始时间"
             width="210">
             <template slot-scope="scope">
-              {{scope.row.serviceStartAt | timeDateChange}}
+              {{scope.row.serviceStartAt | timeDateFormatChange}}
             </template>
           </el-table-column>
           <el-table-column
@@ -212,7 +212,7 @@
             label="权限（服务）结束时间"
             width="210">
             <template slot-scope="scope">
-              {{scope.row.serviceEndAt | timeDateChange}}
+              {{scope.row.serviceEndAt | timeDateFormatChange}}
             </template>
           </el-table-column>
           <el-table-column
