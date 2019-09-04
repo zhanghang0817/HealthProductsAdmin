@@ -178,7 +178,8 @@
         align="center"
         prop="couponPrice"
         label="优惠券金额"
-        width="130">
+        width="130"
+        :formatter="formatePrice">
       </el-table-column>
     </el-table>
 
@@ -282,6 +283,11 @@
           }
           this.requestParams.cp = this.currentPage
           this.getAllData()
+        },
+        formatePrice :function(row, column) {
+          if (row.couponPrice){
+            return row.couponPrice/100
+          }
         }
       },
 

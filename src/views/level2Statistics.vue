@@ -317,7 +317,8 @@
             align="center"
             prop="couponPrice"
             label="优惠券金额"
-            width="130">
+            width="130"
+            :formatter="formatePrice">
           </el-table-column>
         </el-table>
       </el-col>
@@ -451,7 +452,6 @@
           this.requestParams.quarter = undefined
         },
         type_options_value (curValue, oldValue) {
-          this.type_tab_title = curValue
           if (curValue === '中心分公司') {
             this.requestParams.statisticsParam = 'deptName'
             this.type_tab_title = '中心营业部/分公司'
@@ -465,7 +465,14 @@
         }
       },
       mounted: function () {
-        // this.getSearchData()
+        if (window.history && window.history.pushState) {
+          // 向历史记录中插入了当前页
+          history.pushState(null, null, document.URL);
+          window.addEventListener('popstate', this.goBack, false);
+        }
+      },
+      destroyed () {
+        window.removeEventListener('popstate', this.goBack, false);
       },
       methods: {
         one () {
@@ -506,6 +513,7 @@
             _this.currentPage = result.body.data.currentPage
             _this.hasNextPage = result.body.data.hasNextPage
             _this.listLoading = false
+            this.type_tab_title = this.type_options_value
             _this.colConfigs = [{
               prop: this.requestParams.statisticsParam,
               label: (this.type_options_value === '中心分公司' ? '中心营业部/分公司' : this.type_options_value)
@@ -613,6 +621,18 @@
           }
           path = path.substr(0, path.length - 1)
           window.open('e/operate/' + path)
+        },
+        goBack () {
+          if (this.showDetail) {
+            this.backToStatisticPage()
+            return
+          }
+          history.pushState(null, null, document.URL)
+        },
+        formatePrice :function(row, column) {
+          if (row.couponPrice){
+            return row.couponPrice/100
+          }
         }
       }
     }
