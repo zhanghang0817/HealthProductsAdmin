@@ -118,7 +118,6 @@
         :before-close="handleClose">
 
         <div>
-
           <div v-html="promptMessage">{{promptMessage}}</div>
         </div>
         <div style="margin-top: 30px;display: inline-flex">
@@ -150,6 +149,7 @@
 
         return {
 
+          users:[],
           targetSignalType:'',
           currentType:'',
           currentData:'',
