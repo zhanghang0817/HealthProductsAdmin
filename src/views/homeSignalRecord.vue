@@ -141,10 +141,10 @@
             value: '撤销删除'
 
           }, {
-            value: '修改风险'
+            value: '修改为风险'
 
           }, {
-            value: '修改积极'
+            value: '修改为积极'
           }
           ],
           signal_type_value: '',
