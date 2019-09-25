@@ -17,7 +17,7 @@
       </div>
 
       <div>
-        <span class="demonstration"> 情绪识别：</span>
+        <span class="demonstration"> 操作记录：</span>
         <el-select v-model="type_options_value" placeholder="请选择" style="width: 223px">
           <el-option
             v-for="item in type_options"
@@ -63,7 +63,7 @@
     <div style="height: 100px;width:100%;margin-top: 50px">
 
       <el-table :data="users"  v-loading="listLoading" style="width: 100%;"  >
-        <el-table-column  prop="createAt" label="发布时间" align="left"  width="150">
+        <el-table-column  prop="createAt" label="修改时间" align="left"  width="150">
           <template slot-scope="scope">
             {{scope.row.createAt | timeDateChange}}
           </template>
@@ -87,8 +87,8 @@
 
             <span v-if="scope.row.afterSignalType == '未知信号'">删除</span>
             <span v-if="(scope.row.afterSignalType == '空信号' && scope.row.label == '政策') || scope.row.preSignalType == '未知信号'">撤销删除</span>
-            <span v-if="scope.row.preSignalType == '积极信号' && scope.row.afterSignalType == '风险信号'">修改风险</span>
-            <span v-if="scope.row.preSignalType == '风险信号' && scope.row.afterSignalType == '积极信号'">修改积极</span>
+            <span v-if="scope.row.preSignalType == '积极信号' && scope.row.afterSignalType == '风险信号'">修改为风险</span>
+            <span v-if="scope.row.preSignalType == '风险信号' && scope.row.afterSignalType == '积极信号'">修改为积极</span>
 
           </template>
         </el-table-column>
@@ -109,23 +109,22 @@
 
 <script>
     export default {
-        name: "homeSignalRecord",
+      name: 'homeSignalRecord',
 
       data: function () {
-
-        var currentDate = new Date();
-        var month = currentDate.getMonth();
-        var startDate = new Date();
+        var currentDate = new Date()
+        var month = currentDate.getMonth()
+        var startDate = new Date()
         startDate.setMonth(month - 1)
 
         return {
 
-          users:[],
-          targetSignalType:'',
-          currentType:'',
-          currentData:'',
-          input_value:'',
-          classA:'red',
+          users: [],
+          targetSignalType: '',
+          currentType: '',
+          currentData: '',
+          input_value: '',
+          classA: 'red',
           currentPage: 1,
           hasNextPage: false,
           hasProPage: false,
@@ -134,21 +133,21 @@
           type_options_value: '',
           type_options: [{
             value: '请选择',
-            operateType:''
+            operateType: ''
           }, {
-            value: '删除',
+            value: '删除'
 
           }, {
-            value: '撤销删除',
+            value: '撤销删除'
 
-          },{
-            value: '修改风险',
+          }, {
+            value: '修改风险'
 
-          },{
-            value: '修改积极',
+          }, {
+            value: '修改积极'
           }
           ],
-          signal_type_value:'',
+          signal_type_value: '',
           signal_type_options: [{
             value: '全部'
           }, {
@@ -158,93 +157,80 @@
           }, {
             value: '政策'
           }],
-          requestParams:{
-            cp:'1',
-            ps:'10'
+          requestParams: {
+            cp: '1',
+            ps: '10'
           }
         }
       },
 
-      //监听input变化
-      watch:{
-        type_options_value(curVal,oldVal){
-
-          this.requestParams.operateType = this.type_options_value;
-          console.log(this.requestParams.operateType);
+      // 监听input变化
+      watch: {
+        type_options_value (curVal, oldVal) {
+          this.requestParams.operateType = this.type_options_value
+          console.log(this.requestParams.operateType)
         },
-        signal_type_value(curVal,oldVal){
-
-          this.requestParams.labels = this.signal_type_value;
-          console.log(  this.requestParams.labels);
+        signal_type_value (curVal, oldVal) {
+          this.requestParams.labels = this.signal_type_value
+          console.log(this.requestParams.labels)
         },
-        input_value(curVal,oldVal){
-
-          clearTimeout(this.timeout);
+        input_value (curVal, oldVal) {
+          clearTimeout(this.timeout)
           this.timeout = setTimeout(() => {
-            this.requestParams.title = this.input_value;
-          }, 500);
+            this.requestParams.title = this.input_value
+          }, 500)
         },
-        TimeSpace(){
-
-          var startDate = this.TimeSpace[0];
-          var endDate = this.TimeSpace[1];
-          var startAt = startDate.getTime();
-          var endAt = endDate.getTime();
-          this.requestParams.startAt = startAt;
-          this.requestParams.endAt = endAt;
-          console.log(startAt,endAt);
+        TimeSpace () {
+          var startDate = this.TimeSpace[0]
+          var endDate = this.TimeSpace[1]
+          var startAt = startDate.getTime()
+          var endAt = endDate.getTime()
+          this.requestParams.startAt = startAt
+          this.requestParams.endAt = endAt
+          console.log(startAt, endAt)
         }
       },
 
-      mounted:function(){
-
-        this.getAllData();
-      },
+      mounted: function () {
+        this.getAllData()
+  },
       methods: {
 
-        //获取所有的数据
-        getAllData(){
-
-          this.requestMethods('GET','/signal/content/all',this.requestParams);
-
-       },
-        //获取条件查询查询数据
-        getSearchData(){
-
-          if (this.requestParams.labels == '全部'){
-
-            this.requestParams.labels = '';
+        // 获取所有的数据
+        getAllData () {
+          this.requestMethods('GET', '/signal/content/all', this.requestParams)
+        },
+        // 获取条件查询查询数据
+        getSearchData () {
+          if (this.requestParams.labels == '全部') {
+            this.requestParams.labels = ''
           }
-          if (this.requestParams.operateType == '请选择'){
-
-            this.requestParams.operateType = '';
+          if (this.requestParams.operateType == '请选择') {
+            this.requestParams.operateType = ''
           }
 
           debugger
-          this.getRequestSearchData();
+          this.getRequestSearchData()
         },
 
-        //根据条件搜索请求
-        getRequestSearchData(){
-
-          this.requestMethods('GET','/signal/content/dim/content/title/change',this.requestParams);
-
+        // 根据条件搜索请求
+        getRequestSearchData () {
+          this.requestMethods('GET', '/signal/content/dim/content/title/change', this.requestParams)
         },
-        //重置事件
-        defaultConfig(){
-
-          this.type_options_value = this.type_options[0].value;
-          this.signal_type_value = this.signal_type_options[0].value;
-          this.input_value = '';
-          this.currentPage = 1;
-          this.requestParams.cp = this.currentPage;
-          this.requestParams.signalType = '';
-          this.requestParams.labels = '';
-          this.requestParams.startAt = '';
-          this.requestParams.endAt = '';
-          this.getAllData();
+        // 重置事件
+        defaultConfig () {
+          this.type_options_value = this.type_options[0].value
+          this.signal_type_value = this.signal_type_options[0].value
+          this.input_value = ''
+          this.currentPage = 1
+          this.requestParams.cp = this.currentPage
+          this.requestParams.signalType = ''
+          this.requestParams.labels = ''
+          this.requestParams.startAt = ''
+          this.requestParams.endAt = ''
+          this.getAllData()
         },
-        //下一页||上一页
+        // 下一页||上一页
         nextPage: function (val) {
           this.currentPage = Number(this.currentPage) + Number(val)
           this.requestParams.cp = this.currentPage
@@ -253,25 +239,24 @@
             this.currentPage = 1
           }
 
-          this.getSearchData();
+          this.getSearchData()
         },
 
-        requestMethods(method,url,params){
-
+        requestMethods (method, url, params) {
           let _this = this
           _this.listLoading = true
           this.$http({
             method: method,
-            url:url,
+            url: url,
             params: params,
             headers: {'X-Requested-With': 'XMLHttpRequest'},
             body: {},
             emulateJSON: false
           }).then(function (result) {
-
+            debugger
             _this.users = result.body.data.list
             _this.currentPage = result.body.data.currentPage
-            _this.hasNextPage = result.body.data.totalPage > _this.currentPage ? true : false
+            _this.hasNextPage = result.body.data.totalPage > _this.currentPage
             _this.listLoading = false
             if (result.body.data.currentPage === 1 || !result.body.data.currentPage) {
               _this.hasProPage = false
@@ -279,11 +264,9 @@
             } else {
               _this.hasProPage = true
             }
-
           }).catch(() => {
             _this.$message.error('操作失败!!!！')
           })
-
         }
       }
 
