@@ -237,7 +237,8 @@
             align="center"
             prop="payPrice"
             label="下单价格"
-            width="120">
+            width="120"
+            :formatter="formatePrice">
           </el-table-column>
           <el-table-column
             align="center"
