@@ -49,6 +49,12 @@
 
           </el-submenu>
 
+          <el-submenu index="9" v-if="menuList.indexOf('assess:view') == -1?false:true">
+            <template slot="title" v-if="menuList.indexOf('assess:view') == -1?false:true"><i class="fa fa-calendar"></i>
+              Level2考核数据</template>
+            <el-menu-item  index="1-1" @click="goPage('/level2AssessData')" v-if="menuList.indexOf('assess:view') == -1?false:true">数据查询</el-menu-item>
+            <el-menu-item  index="1-2" @click="goPage('/level2Statistics')" v-if="menuList.indexOf('assess:statistics') == -1?false:true">数据统计</el-menu-item>
+          </el-submenu>
         </el-menu>
 
       </aside>
@@ -221,6 +227,12 @@ export default {
         return false
       } else if (_this.menuList.indexOf('level2coupon:view') !== -1) {
         _this.$router.push('/level2coupon')
+        return false
+      } else if (_this.menuList.indexOf('assess:view') !== -1) {
+        _this.$router.push('/level2AssessData')
+        return false
+      } else if (_this.menuList.indexOf('assess:statistics') !== -1) {
+        _this.$router.push('/level2Statistics')
         return false
       }
     }
