@@ -95,11 +95,26 @@
 
       </el-table>
 
-      <div class="block" style="float:right;margin:10px 18px">
-        <el-button type="primary" :disabled="!hasProPage" @click="nextPage('-1')">上一页</el-button>
-        第{{currentPage}}页
-        <el-button type="primary" :disabled="!hasNextPage" @click="nextPage('1')">下一页</el-button>
-      </div>
+
+      <el-row type="flex" justify="center" class="zoom-pagi" style="margin-top: 20px">
+        <el-col type="flex" justify="center">
+          <el-pagination align="center"
+                         :current-page.sync="requestParams.cp"
+                         :page-size="requestParams.ps"
+                         :total="totalCount"
+                         class="pagination"
+                         layout="total, prev, pager, next, jumper"
+                         @current-change="pageChange">
+          </el-pagination>
+        </el-col>
+      </el-row>
+
+
+      <!--<div class="block" style="float:right;margin:10px 18px">-->
+        <!--<el-button type="primary" :disabled="!hasProPage" @click="nextPage('-1')">上一页</el-button>-->
+        <!--第{{currentPage}}页-->
+        <!--<el-button type="primary" :disabled="!hasNextPage" @click="nextPage('1')">下一页</el-button>-->
+      <!--</div>-->
     </div>
 
   </div>
@@ -119,6 +134,7 @@
 
         return {
 
+          totalCount:0,
           users: [],
           targetSignalType: '',
           currentType: '',
@@ -158,8 +174,8 @@
             value: '政策'
           }],
           requestParams: {
-            cp: '1',
-            ps: '10'
+            cp: 1,
+            ps: 10
           }
         }
       },
@@ -208,8 +224,6 @@
           if (this.requestParams.operateType == '请选择') {
             this.requestParams.operateType = ''
           }
-
-          debugger
           this.getRequestSearchData()
         },
 
@@ -231,18 +245,25 @@
           this.getAllData()
         },
         // 下一页||上一页
-        nextPage: function (val) {
-          this.currentPage = Number(this.currentPage) + Number(val)
-          this.requestParams.cp = this.currentPage
-          if (this.currentPage <= 1) {
-            this.hasProPage = false
-            this.currentPage = 1
-          }
+        // nextPage: function (val) {
+        //   this.currentPage = Number(this.currentPage) + Number(val)
+        //   this.requestParams.cp = this.currentPage
+        //   if (this.currentPage <= 1) {
+        //     this.hasProPage = false
+        //     this.currentPage = 1
+        //   }
+        //   this.getSearchData()
+        // },
 
+        // 点击分页
+        pageChange: function (page) {
+          this.requestParams.cp = page
           this.getSearchData()
         },
 
         requestMethods (method, url, params) {
+
+          debugger
           let _this = this
           _this.listLoading = true
           this.$http({
@@ -255,15 +276,18 @@
           }).then(function (result) {
             debugger
             _this.users = result.body.data.list
-            _this.currentPage = result.body.data.currentPage
-            _this.hasNextPage = result.body.data.totalPage > _this.currentPage
+            this.totalCount = result.body.data.totalCount;
+            this.requestParams.cp = result.body.data.currentPage;
+
+            // _this.currentPage = result.body.data.currentPage
+            // _this.hasNextPage = result.body.data.totalPage > _this.currentPage
             _this.listLoading = false
-            if (result.body.data.currentPage === 1 || !result.body.data.currentPage) {
-              _this.hasProPage = false
-              _this.currentPage = 1
-            } else {
-              _this.hasProPage = true
-            }
+            // if (result.body.data.currentPage === 1 || !result.body.data.currentPage) {
+            //   _this.hasProPage = false
+            //   _this.currentPage = 1
+            // } else {
+            //   _this.hasProPage = true
+            // }
           }).catch(() => {
             _this.$message.error('操作失败!!!！')
           })
