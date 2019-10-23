@@ -244,16 +244,6 @@
           this.requestParams.endAt = ''
           this.getAllData()
         },
-        // 下一页||上一页
-        // nextPage: function (val) {
-        //   this.currentPage = Number(this.currentPage) + Number(val)
-        //   this.requestParams.cp = this.currentPage
-        //   if (this.currentPage <= 1) {
-        //     this.hasProPage = false
-        //     this.currentPage = 1
-        //   }
-        //   this.getSearchData()
-        // },
 
         // 点击分页
         pageChange: function (page) {
@@ -276,18 +266,9 @@
           }).then(function (result) {
             debugger
             _this.users = result.body.data.list
-            this.totalCount = result.body.data.totalCount;
-            this.requestParams.cp = result.body.data.currentPage;
-
-            // _this.currentPage = result.body.data.currentPage
-            // _this.hasNextPage = result.body.data.totalPage > _this.currentPage
+            this.totalCount = result.body.data.totalCount
+            this.requestParams.cp = result.body.data.currentPage
             _this.listLoading = false
-            // if (result.body.data.currentPage === 1 || !result.body.data.currentPage) {
-            //   _this.hasProPage = false
-            //   _this.currentPage = 1
-            // } else {
-            //   _this.hasProPage = true
-            // }
           }).catch(() => {
             _this.$message.error('操作失败!!!！')
           })
