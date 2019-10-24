@@ -325,7 +325,12 @@
           if (_this.requestParams.ps == 99999){
             _this.requestParams.ps = 10
             _this.exportListData =  result.body.data.list
-            _this.exportText()
+
+            if ( _this.exportListData.length ==0){
+              _this.$message.error('没有数据，暂不能导出')
+            }else {
+              _this.exportText()
+            }
           }else {
             _this.users = result.body.data.list
             this.totalCount = result.body.data.totalCount
