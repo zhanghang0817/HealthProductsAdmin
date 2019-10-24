@@ -116,13 +116,16 @@
 
 
       <el-dialog
-        title="提示"
-        :visible.sync="dialogVisible">
-
-        <div style="margin-top: 30px;display: inline-flex">
-          <el-input v-model="inputText" placeholder="请输入标题" clearable=true></el-input>
+        title="创建文件标签"
+        :visible.sync="dialogVisible"div
+        width="30%">
+        <div style="margin-top: 20px;display:flex;height: 50px;justify-content: center;align-items: center;">
+          <div>标签:&nbsp&nbsp&nbsp&nbsp&nbsp</div>
+          <div>
+            <el-input v-model="inputText" placeholder="请输入标题" size="small"></el-input>
+          </div>
         </div>
-
+        <div style="font-size:10px;color: red">*标签名最多20个字符</div>
         <span slot="footer" class="dialog-footer">
              <el-button @click="dialogVisible = false">取 消</el-button>
              <el-button type="primary" @click="requestExportData()">确 定</el-button>
