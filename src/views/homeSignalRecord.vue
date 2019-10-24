@@ -58,6 +58,11 @@
       <div style="margin-left: 30px" >
         <el-button @click="defaultConfig">重置</el-button>
       </div>
+
+      <div style="margin-left: 30px" >
+        <el-button @click="dialogVisible=true">导出</el-button>
+      </div>
+
     </div>
 
     <div style="height: 100px;width:100%;margin-top: 50px">
@@ -110,11 +115,21 @@
       </el-row>
 
 
-      <!--<div class="block" style="float:right;margin:10px 18px">-->
-        <!--<el-button type="primary" :disabled="!hasProPage" @click="nextPage('-1')">上一页</el-button>-->
-        <!--第{{currentPage}}页-->
-        <!--<el-button type="primary" :disabled="!hasNextPage" @click="nextPage('1')">下一页</el-button>-->
-      <!--</div>-->
+      <el-dialog
+        title="提示"
+        :visible.sync="dialogVisible">
+
+        <div style="margin-top: 30px;display: inline-flex">
+          <el-input v-model="inputText" placeholder="请输入标题" clearable=true></el-input>
+        </div>
+
+        <span slot="footer" class="dialog-footer">
+             <el-button @click="dialogVisible = false">取 消</el-button>
+             <el-button type="primary" @click="requestExportData()">确 定</el-button>
+        </span>
+      </el-dialog>
+
+
     </div>
 
   </div>
@@ -123,159 +138,207 @@
 
 
 <script>
-    export default {
-      name: 'homeSignalRecord',
 
-      data: function () {
-        var currentDate = new Date()
-        var month = currentDate.getMonth()
-        var startDate = new Date()
-        startDate.setMonth(month - 1)
+  import FileSaver from 'file-saver'
 
-        return {
+  export default {
+    name: 'homeSignalRecord',
+    data: function () {
+      var currentDate = new Date()
+      var month = currentDate.getMonth()
+      var startDate = new Date()
+      startDate.setMonth(month - 1)
+      return {
 
-          totalCount:0,
-          users: [],
-          targetSignalType: '',
-          currentType: '',
-          currentData: '',
-          input_value: '',
-          classA: 'red',
-          currentPage: 1,
-          hasNextPage: false,
-          hasProPage: false,
-          listLoading: false,
-          TimeSpace: [startDate, currentDate],
-          type_options_value: '',
-          type_options: [{
-            value: '请选择',
-            operateType: ''
-          }, {
-            value: '删除'
+        dialogVisible: false,
+        exportListData:[],
+        inputText:'华创情感识别',
+        totalCount: 0,
+        users: [],
+        targetSignalType: '',
+        currentType: '',
+        currentData: '',
+        input_value: '',
+        classA: 'red',
+        currentPage: 1,
+        hasNextPage: false,
+        hasProPage: false,
+        listLoading: false,
+        TimeSpace: [startDate, currentDate],
+        type_options_value: '',
+        type_options: [{
+          value: '请选择',
+          operateType: ''
+        }, {
+          value: '删除'
 
-          }, {
-            value: '撤销删除'
+        }, {
+          value: '撤销删除'
 
-          }, {
-            value: '修改为风险'
+        }, {
+          value: '修改为风险'
 
-          }, {
-            value: '修改为积极'
-          }
-          ],
-          signal_type_value: '',
-          signal_type_options: [{
-            value: '全部'
-          }, {
-            value: '产业'
-          }, {
-            value: '焦点'
-          }, {
-            value: '政策'
-          }],
-          requestParams: {
-            cp: 1,
-            ps: 10
-          }
+        }, {
+          value: '修改为积极'
         }
-      },
+        ],
+        signal_type_value: '',
+        signal_type_options: [{
+          value: '全部'
+        }, {
+          value: '产业'
+        }, {
+          value: '焦点'
+        }, {
+          value: '政策'
+        }],
+        requestParams: {
+          cp: 1,
+          ps: 10
+        }
+      }
+    },
 
       // 监听input变化
-      watch: {
-        type_options_value (curVal, oldVal) {
-          this.requestParams.operateType = this.type_options_value
-          console.log(this.requestParams.operateType)
-        },
-        signal_type_value (curVal, oldVal) {
-          this.requestParams.labels = this.signal_type_value
-          console.log(this.requestParams.labels)
-        },
-        input_value (curVal, oldVal) {
-          clearTimeout(this.timeout)
-          this.timeout = setTimeout(() => {
-            this.requestParams.title = this.input_value
-          }, 500)
-        },
-        TimeSpace () {
-          var startDate = this.TimeSpace[0]
-          var endDate = this.TimeSpace[1]
-          var startAt = startDate.getTime()
-          var endAt = endDate.getTime()
-          this.requestParams.startAt = startAt
-          this.requestParams.endAt = endAt
-          console.log(startAt, endAt)
-        }
+    watch: {
+      type_options_value (curVal, oldVal) {
+        this.requestParams.operateType = this.type_options_value
+        console.log(this.requestParams.operateType)
       },
+      signal_type_value (curVal, oldVal) {
+        this.requestParams.labels = this.signal_type_value
+        console.log(this.requestParams.labels)
+      },
+      input_value (curVal, oldVal) {
+        clearTimeout(this.timeout)
+        this.timeout = setTimeout(() => {
+          this.requestParams.title = this.input_value
+        }, 500)
+      },
+      TimeSpace () {
+        var startDate = this.TimeSpace[0]
+        var endDate = this.TimeSpace[1]
+        var startAt = startDate.getTime()
+        var endAt = endDate.getTime()
+        this.requestParams.startAt = startAt
+        this.requestParams.endAt = endAt
+        console.log(startAt, endAt)
+      }
+    },
 
-      mounted: function () {
-        this.getAllData()
-  },
-      methods: {
+    mounted: function () {
+      this.getAllData()
+    },
+
+    methods: {
 
         // 获取所有的数据
-        getAllData () {
-          this.requestMethods('GET', '/signal/content/all', this.requestParams)
-        },
+      getAllData () {
+        this.requestMethods('GET', '/signal/content/all', this.requestParams)
+      },
         // 获取条件查询查询数据
-        getSearchData () {
-          if (this.requestParams.labels == '全部') {
-            this.requestParams.labels = ''
-          }
-          if (this.requestParams.operateType == '请选择') {
-            this.requestParams.operateType = ''
-          }
-          this.getRequestSearchData()
-        },
+      getSearchData () {
+        if (this.requestParams.labels == '全部') {
+          this.requestParams.labels = ''
+        }
+        if (this.requestParams.operateType == '请选择') {
+          this.requestParams.operateType = ''
+        }
+
+        this.getRequestSearchData()
+      },
 
         // 根据条件搜索请求
-        getRequestSearchData () {
-          this.requestMethods('GET', '/signal/content/dim/content/title/change', this.requestParams)
-        },
+      getRequestSearchData () {
+
+        this.requestMethods('GET', '/signal/content/dim/content/title/change', this.requestParams)
+      },
         // 重置事件
-        defaultConfig () {
-          this.type_options_value = this.type_options[0].value
-          this.signal_type_value = this.signal_type_options[0].value
-          this.input_value = ''
-          this.currentPage = 1
-          this.requestParams.cp = this.currentPage
-          this.requestParams.signalType = ''
+      defaultConfig () {
+        this.type_options_value = this.type_options[0].value
+        this.signal_type_value = this.signal_type_options[0].value
+        this.input_value = ''
+        this.currentPage = 1
+        this.requestParams.cp = this.currentPage
+        this.requestParams.signalType = ''
+        this.requestParams.labels = ''
+        this.requestParams.startAt = ''
+        this.requestParams.endAt = ''
+        this.getAllData()
+      },
+
+      //请求需要导出的数据
+      requestExportData(){
+
+        //请求需要导出的数据（全部数据，需要修改请求参数）
+        if (this.requestParams.operateType == '请选择' || this.requestParams.operateType == undefined) {
+          this.requestParams.operateType = '删除,修改为风险,修改为积极'
+        }
+        if (this.requestParams.labels == '全部') {
           this.requestParams.labels = ''
-          this.requestParams.startAt = ''
-          this.requestParams.endAt = ''
-          this.getAllData()
-        },
+        }
+        this.requestParams.cp = 1
+        this.requestParams.ps = 99999
 
-        // 点击分页
-        pageChange: function (page) {
-          this.requestParams.cp = page
-          this.getSearchData()
-        },
+        this.getRequestSearchData()
 
-        requestMethods (method, url, params) {
+      },
+      //导出txt文件
+      exportText () {
 
-          debugger
-          let _this = this
-          _this.listLoading = true
-          this.$http({
-            method: method,
-            url: url,
-            params: params,
-            headers: {'X-Requested-With': 'XMLHttpRequest'},
-            body: {},
-            emulateJSON: false
-          }).then(function (result) {
-            debugger
+        var string = '';
+        let _this = this
+
+        for (var i = 0; i<_this.exportListData.length;i++){
+          let item = _this.exportListData[i];
+          var signalType = '其它'
+          if (item.afterSignalType == '风险信号'){
+            signalType = '利空'
+          } else if (item.afterSignalType == '积极信号') {
+            signalType = '利多'
+          }
+          string += _this.inputText + ':' + signalType + '|||' + item.title + '\n'
+        }
+        var blob = new Blob([string], {type: 'text/plain;charset=utf-8'})
+        FileSaver.saveAs(blob, _this.inputText +'.txt')
+        this.dialogVisible = false;
+      },
+
+    // 点击分页
+      pageChange: function (page) {
+        this.requestParams.cp = page
+        this.getSearchData()
+      },
+
+      requestMethods (method, url, params) {
+
+        let _this = this
+        _this.listLoading = true
+        this.$http({
+          method: method,
+          url: url,
+          params: params,
+          headers: {'X-Requested-With': 'XMLHttpRequest'},
+          body: {},
+          emulateJSON: false
+        }).then(function (result) {
+          if (_this.requestParams.ps == 99999){
+            _this.requestParams.ps = 10
+            _this.exportListData =  result.body.data.list
+            _this.exportText()
+          }else {
             _this.users = result.body.data.list
             this.totalCount = result.body.data.totalCount
             this.requestParams.cp = result.body.data.currentPage
-            _this.listLoading = false
-          }).catch(() => {
-            _this.$message.error('操作失败!!!！')
-          })
-        }
+          }
+          _this.listLoading = false
+        }).catch(() => {
+          _this.$message.error('操作失败!!!！')
+        })
       }
-
     }
+
+  }
 </script>
 
 <style scoped>
