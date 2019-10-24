@@ -122,7 +122,7 @@
         <div style="margin-top: 20px;display:flex;height: 50px;justify-content: center;align-items: center;">
           <div>标签:&nbsp&nbsp&nbsp&nbsp&nbsp</div>
           <div>
-            <el-input v-model="inputText" placeholder="请输入标题" size="small" maxlength="20" ></el-input>
+            <el-input v-model="inputText" placeholder="请输入标题" size="small" :maxlength=20 ></el-input>
           </div>
         </div>
         <div style="font-size:10px;color: red">*标签名最多20个字符</div>
