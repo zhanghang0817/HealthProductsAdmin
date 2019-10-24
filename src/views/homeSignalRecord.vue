@@ -264,7 +264,7 @@
             body: {},
             emulateJSON: false
           }).then(function (result) {
-            debugger
+
             _this.users = result.body.data.list
             this.totalCount = result.body.data.totalCount
             this.requestParams.cp = result.body.data.currentPage
