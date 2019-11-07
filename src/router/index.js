@@ -18,6 +18,7 @@ import homeSignal from '@/views/homeSignal.vue'
 import homeSignalUpdate from '@/views/homeSignalRecord.vue'
 import level2AssessData from '@/views/level2AssessData.vue'
 import level2Statistics from '@/views/level2Statistics.vue'
+import homePop from '@/views/homePop.vue'
 
 Vue.use(Router)
 
@@ -49,7 +50,8 @@ export default new Router({
         {path: '/homeSignal', component: homeSignal, name: '信号管理'},
         {path: '/homeSignalUpdate', component: homeSignalUpdate, name: '已修正条目'},
         {path: '/level2AssessData', component: level2AssessData, name: 'Level2考核数据查询'},
-        {path: '/level2Statistics', component: level2Statistics, name: 'Level2考核数据统计'}
+        {path: '/level2Statistics', component: level2Statistics, name: 'Level2考核数据统计'},
+        {path: '/homePop', component: homePop, name: '首页弹框'}
       ]
     }
   ]
