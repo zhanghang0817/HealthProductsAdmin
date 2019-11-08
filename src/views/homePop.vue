@@ -339,14 +339,14 @@
             body.buttonOneLabel = this.ruleForm.upgradeBtn;
             body.buttonTwoLabel = this.ruleForm.notUpgradeBtn;
             body.content = this.ruleForm.content;
-            body.title = this.ruleForm.content;
-            body.appVersion = this.ruleForm.content;
+            body.title = this.ruleForm.title;
+            body.appVersion = this.ruleForm.version;
             break;
           case "7":
             body.buttonOneLabel = this.ruleForm.upgradeBtn;
             body.content = this.ruleForm.content;
-            body.title = this.ruleForm.content;
-            body.appVersion = this.ruleForm.content;
+            body.title = this.ruleForm.title;
+            body.appVersion = this.ruleForm.version;
             break;
           case "5":
             body.buttonOneLabel = this.ruleForm.textFirstBtn;
@@ -356,7 +356,7 @@
             body.buttonTwoColor = this.ruleForm.colorSecondBtn;
             body.buttonTwoCommand = this.ruleForm.urlSecondBtn;
             body.content = this.ruleForm.content;
-            body.title = this.ruleForm.content;
+            body.title = this.ruleForm.title;
             break;
           case "4":
             body.picAdUrl = this.ruleForm.urlImage;
