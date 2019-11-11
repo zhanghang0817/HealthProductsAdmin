@@ -7,7 +7,7 @@
       >
       <el-table-column
       label="发布时间"
-      width="150">
+      width="150" align="center">
       <template slot-scope="scope">
       <!--<span style="margin-left: 10px">{{ scope.row.createAt}}</span>-->
         {{scope.row.createAt | timeDateChange}}
@@ -15,7 +15,7 @@
       </el-table-column>
       <el-table-column
       label="弹窗类型"
-      width="150">
+      width="150" align="center">
       <template slot-scope="scope">
         <span v-if="scope.row.popupType == 8">版本升级提示</span>
         <span v-if="scope.row.popupType == 7">强制版本升级提示</span>
@@ -26,35 +26,35 @@
 
       <el-table-column
       label="标题"
-      width="180">
+      width="180" align="center">
       <template slot-scope="scope">
-      <span style="margin-left: 10px">{{ scope.row.title }}</span>
+      <span>{{ scope.row.title }}</span>
       </template>
       </el-table-column>
 
       <el-table-column
       label="内容"
-      width="">
+      width=""  align="center">
       <template slot-scope="scope">
-      <span style="margin-left: 10px">{{ scope.row.content }}</span>
+      <span>{{ scope.row.content }}</span>
       </template>
       </el-table-column>
 
       <el-table-column
       label="图片"
-      width="100">
+      width="100" align="center">
       <template slot-scope="scope">
-      <span style="margin-left: 10px">{{ scope.row.dataType }}</span>
+      <span>{{ scope.row.dataType }}</span>
       </template>
       </el-table-column>
 
       <el-table-column
       label="按钮"
-      width="100">
+      width="100" align="center">
       <template slot-scope="scope">
-         <span style="margin-left: 10px" v-if="scope.row.buttonOneLabel != undefined && scope.row.buttonTwoLabel.length != undefined ">2个</span>
-         <span style="margin-left: 10px" v-else-if="scope.row.buttonOneLabel!= undefined || scope.row.buttonTwoLabel!= undefined">1个</span>
-         <span style="margin-left: 10px" v-else>--</span>
+         <span  v-if="scope.row.buttonOneLabel != undefined && scope.row.buttonTwoLabel.length != undefined ">2个</span>
+         <span  v-else-if="scope.row.buttonOneLabel!= undefined || scope.row.buttonTwoLabel!= undefined">1个</span>
+         <span  v-else>--</span>
       </template>
       </el-table-column>
 
@@ -68,7 +68,7 @@
 
       <el-table-column
       label="上线"
-      width="100">
+      width="100" align="center">
       <template slot-scope="scope">
       <el-switch
       v-model="scope.row.publishStatus==1?true:false"
@@ -83,7 +83,7 @@
 
 
       <el-table-column label="操作"
-                       width="120">
+                       width="150" align="center">
       <template slot-scope="scope">
       <el-button
       size="mini"
@@ -263,10 +263,10 @@
             {required: true, message: '请输入按钮文字', trigger: 'blur'}
           ],
           colorFirstBtn: [
-            {required: true, message: '请输入按钮文字', trigger: 'blur'}
+            {required: true, message: '请输入按钮颜色', trigger: 'blur'}
           ],
           urlFirstBtn: [
-            {required: true, message: '请输入按钮文字', trigger: 'blur'}
+            {required: true, message: '请输入按钮指令/链接', trigger: 'blur'}
           ],
           upgradeBtn: [
             {required: true, message: '请输入按钮文字', trigger: 'blur'}
@@ -276,9 +276,6 @@
           ],
           colorBtn: [
             {required: true, message: '请输入按钮颜色', trigger: 'blur'}
-          ],
-          urlBtn: [
-            {required: true, message: '请输入按钮指令/链接', trigger: 'blur'}
           ],
           urlImage: [
             {required: true, message: '请输入图片链接', trigger: 'blur'}
@@ -427,6 +424,11 @@
         //id没有值是创建，有值是编辑
         if (body.id == '' || body.id == undefined) {
 
+          if (!this.paramsValidate(body)) {
+            this.warning('请填写全部必须参数!');
+            return;
+          }
+          
           this.operationRequest('POST',body);
 
         }else {
@@ -441,7 +443,7 @@
         if (url == '' || url == undefined){
             url = '/e/operate/popup/'
         }
-        debugger
+
         this.$http({
           method: method,
           url: url,
@@ -502,6 +504,8 @@
 
       },
       reset() {
+        this.$refs['ruleForm'].clearValidate();
+
         this.elItem.title = false;
         this.elItem.version = false;
         this.elItem.contentPop = false;
@@ -574,7 +578,13 @@
           message: msg,
           type: 'warning'
         })
-      },
+      }, paramsValidate(params) {
+        let flag = true;
+        for (let key in params) {
+          if (!params[key]) return;
+        }
+        return flag;
+      }
     }
   }
 </script>
