@@ -277,10 +277,10 @@
             {required: true, message: '请输入按钮文字', trigger: 'blur'}
           ],
           colorFirstBtn: [
-            {required: true, message: '请输入按钮文字', trigger: 'blur'}
+            {required: true, message: '请输入按钮颜色', trigger: 'blur'}
           ],
           urlFirstBtn: [
-            {required: true, message: '请输入按钮文字', trigger: 'blur'}
+            {required: true, message: '请输入按钮指令/链接', trigger: 'blur'}
           ],
           upgradeBtn: [
             {required: true, message: '请输入按钮文字', trigger: 'blur'}
@@ -290,9 +290,6 @@
           ],
           colorBtn: [
             {required: true, message: '请输入按钮颜色', trigger: 'blur'}
-          ],
-          urlBtn: [
-            {required: true, message: '请输入按钮指令/链接', trigger: 'blur'}
           ],
           urlImage: [
             {required: true, message: '请输入图片链接', trigger: 'blur'}
@@ -364,6 +361,11 @@
             break;
         }
 
+        if (!this.paramsValidate(body)) {
+          this.warning('请填写全部必须参数!');
+          return;
+        }
+
         this.$http({
           method: 'POST',
           url: '/e/operate/popup',
@@ -417,6 +419,7 @@
 
       },
       reset() {
+
         this.elItem.title = false;
         this.elItem.version = false;
         this.elItem.contentPop = false;
@@ -488,7 +491,13 @@
           message: msg,
           type: 'warning'
         })
-      },
+      }, paramsValidate(params) {
+        let flag = true;
+        for (let key in params) {
+          if (!params[key]) return;
+        }
+        return flag;
+      }
     }
   }
 </script>
