@@ -419,6 +419,7 @@
 
       },
       reset() {
+        this.$refs['ruleForm'].clearValidate();
 
         this.elItem.title = false;
         this.elItem.version = false;
