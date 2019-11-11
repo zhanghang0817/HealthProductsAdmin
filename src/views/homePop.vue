@@ -388,7 +388,6 @@
         let body = {
           popupType: parseInt(this.ruleForm.popType),
           publishStatus: this.ruleForm.delivery ? 1 : 0,
-          id:this.ruleForm.id,
         };
 
         switch (this.ruleForm.popType) {
@@ -428,11 +427,11 @@
             this.warning('请填写全部必须参数!');
             return;
           }
-          
+
           this.operationRequest('POST',body);
 
         }else {
-
+          body.id = this.ruleForm.id;
           this.operationRequest('PUT',body);
         }
       },
