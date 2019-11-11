@@ -1,56 +1,62 @@
 <template>
   <el-tabs v-model="activeName" @tab-click="handleClick">
     <el-tab-pane label="弹窗管理" name="first">
-      <!--<el-table-->
-      <!--:data="tableData"-->
-      <!--border-->
-      <!--style="width: 100%">-->
-      <!--<el-table-column-->
-      <!--label="发布时间"-->
-      <!--width="180">-->
-      <!--<template slot-scope="scope">-->
-      <!--<span style="margin-left: 10px">{{ scope.row.date }}</span>-->
-      <!--</template>-->
-      <!--</el-table-column>-->
-      <!--<el-table-column-->
-      <!--label="弹窗类型"-->
-      <!--width="180">-->
-      <!--<template slot-scope="scope">-->
-      <!--<span style="margin-left: 10px">{{ scope.row.dataType }}</span>-->
-      <!--</template>-->
-      <!--</el-table-column>-->
+      <el-table
+      :data="tableData"
+      border
+      >
+      <el-table-column
+      label="发布时间"
+      width="150">
+      <template slot-scope="scope">
+      <!--<span style="margin-left: 10px">{{ scope.row.createAt}}</span>-->
+        {{scope.row.createAt | timeDateChange}}
+      </template>
+      </el-table-column>
+      <el-table-column
+      label="弹窗类型"
+      width="150">
+      <template slot-scope="scope">
+        <span v-if="scope.row.popupType == 8">版本升级提示</span>
+        <span v-if="scope.row.popupType == 7">强制版本升级提示</span>
+        <span v-if="scope.row.popupType == 5">文字弹窗提示</span>
+        <span v-if="scope.row.popupType == 4">图片弹窗提示</span>
+      </template>
+      </el-table-column>
 
-      <!--<el-table-column-->
-      <!--label="标题"-->
-      <!--width="180">-->
-      <!--<template slot-scope="scope">-->
-      <!--<span style="margin-left: 10px">{{ scope.row.title }}</span>-->
-      <!--</template>-->
-      <!--</el-table-column>-->
+      <el-table-column
+      label="标题"
+      width="180">
+      <template slot-scope="scope">
+      <span style="margin-left: 10px">{{ scope.row.title }}</span>
+      </template>
+      </el-table-column>
 
-      <!--<el-table-column-->
-      <!--label="内容"-->
-      <!--width="180">-->
-      <!--<template slot-scope="scope">-->
-      <!--<span style="margin-left: 10px">{{ scope.row.content }}</span>-->
-      <!--</template>-->
-      <!--</el-table-column>-->
+      <el-table-column
+      label="内容"
+      width="">
+      <template slot-scope="scope">
+      <span style="margin-left: 10px">{{ scope.row.content }}</span>
+      </template>
+      </el-table-column>
 
-      <!--<el-table-column-->
-      <!--label="图片"-->
-      <!--width="180">-->
-      <!--<template slot-scope="scope">-->
-      <!--<span style="margin-left: 10px">{{ scope.row.dataType }}</span>-->
-      <!--</template>-->
-      <!--</el-table-column>-->
+      <el-table-column
+      label="图片"
+      width="100">
+      <template slot-scope="scope">
+      <span style="margin-left: 10px">{{ scope.row.dataType }}</span>
+      </template>
+      </el-table-column>
 
-      <!--<el-table-column-->
-      <!--label="按钮"-->
-      <!--width="120">-->
-      <!--<template slot-scope="scope">-->
-      <!--<span style="margin-left: 10px">{{ scope.row.btnCount }}</span>-->
-      <!--</template>-->
-      <!--</el-table-column>-->
+      <el-table-column
+      label="按钮"
+      width="100">
+      <template slot-scope="scope">
+         <span style="margin-left: 10px" v-if="scope.row.buttonOneLabel != undefined && scope.row.buttonTwoLabel.length != undefined ">2个</span>
+         <span style="margin-left: 10px" v-else-if="scope.row.buttonOneLabel!= undefined || scope.row.buttonTwoLabel!= undefined">1个</span>
+         <span style="margin-left: 10px" v-else>--</span>
+      </template>
+      </el-table-column>
 
       <!--<el-table-column-->
       <!--label="弹出频率"-->
@@ -60,35 +66,38 @@
       <!--</template>-->
       <!--</el-table-column>-->
 
-      <!--<el-table-column-->
-      <!--label="上线"-->
-      <!--width="180">-->
-      <!--<template slot-scope="scope">-->
-      <!--<el-switch-->
-      <!--v-model="value"-->
-      <!--active-color="#13ce66"-->
-      <!--inactive-color="#ff4949">-->
-      <!--</el-switch>-->
-      <!--</template>-->
-      <!--</el-table-column>-->
+      <el-table-column
+      label="上线"
+      width="100">
+      <template slot-scope="scope">
+      <el-switch
+      v-model="scope.row.publishStatus==1?true:false"
+      value="1"
+      active-color="#13ce66"
+      inactive-color="#ff4949"
+      @change="changeStatus($event,scope.row,scope.$index)"
+      >
+      </el-switch>
+      </template>
+      </el-table-column>
 
 
-      <!--<el-table-column label="操作"-->
-      <!--width="200">-->
-      <!--<template slot-scope="scope">-->
-      <!--<el-button-->
-      <!--size="mini"-->
-      <!--@click="handleEdit(scope.$index, scope.row)">编辑-->
-      <!--</el-button>-->
-      <!--<el-button-->
-      <!--size="mini"-->
-      <!--type="danger"-->
-      <!--@click="handleDelete(scope.$index, scope.row)">删除-->
-      <!--</el-button>-->
-      <!--</template>-->
-      <!--</el-table-column>-->
-      <!--</el-table>-->
-      <!--&lt;!&ndash;分页&ndash;&gt;-->
+      <el-table-column label="操作"
+                       width="120">
+      <template slot-scope="scope">
+      <el-button
+      size="mini"
+      @click="handleEdit(scope.$index, scope.row)">编辑
+      </el-button>
+      <el-button
+      size="mini"
+      type="danger"
+      @click="handleDelete(scope.$index, scope.row)">删除
+      </el-button>
+      </template>
+      </el-table-column>
+      </el-table>
+      <!--分页-->
       <!--<div class="block" style="float:right;margin:10px 18px">-->
       <!--<el-button type="primary" :disabled="!hasProPage" @click="nextPage('-1')">上一页</el-button>-->
       <!--第{{currentPage}}页-->
@@ -142,7 +151,7 @@
         </el-form-item>
 
         <el-form-item label="弹窗内容：" prop="content" v-if="elItem.contentPop">
-          <el-input type="textarea" v-model="ruleForm.content" placeholder="请输入弹窗内容"></el-input>
+          <el-input :rows="5" type="textarea" v-model="ruleForm.content" placeholder="请输入弹窗内容"></el-input>
         </el-form-item>
 
         <el-row v-if="elItem.firstBtn">
@@ -217,34 +226,11 @@
     name: 'homePop',
     data() {
       return {
+        isEditForm:false,
         activeName: 'first',
         value: true,
         fileList: [], // 上传音频列表
-        tableData: [{
-          date: '2016-05-02',
-          dataType: '版本升级提示',
-          content: '版本升级提示',
-          btnCount: '1个',
-          title: '创业板上市风险提示'
-        }, {
-          date: '2016-05-04',
-          dataType: '强制升级提示',
-          content: '强制升级提示',
-          btnCount: '1个',
-          title: '创业板上市风险提示'
-        }, {
-          date: '2016-05-01',
-          dataType: '文字通知弹窗',
-          content: '文字通知弹窗',
-          btnCount: '1个',
-          title: '创业板上市风险提示'
-        }, {
-          date: '2016-05-03',
-          dataType: '图片通知弹窗',
-          content: '图片通知弹窗',
-          btnCount: '1个',
-          title: '创业板上市风险提示'
-        }],
+        tableData: [],
         ruleForm: {
           title: '',//标题
           popType: "",//弹窗类型
@@ -311,19 +297,92 @@
         }
       }
     },
+
+    mounted: function () {
+      this.requestDataList()
+    },
     methods: {
+
+      changeStatus(e,row,index){
+
+        debugger
+
+      },
       handleClick(tab, event) {
-//        console.log(tab, event)
         if (tab.name === 'first') {
           this.reset();
           this.fileList = [];
         }
       },
+
+      //请求数据列表
+      requestDataList(){
+
+        this.$http({
+          method: 'GET',
+          url: '/e/operate/popup',
+          body: '',
+          headers: {'X-Requested-With': 'XMLHttpRequest'},
+          emulateJSON: false
+        }).then(function (result) {
+
+          if (result.data.message.code === 0) {
+
+            this.tableData = result.data.data;
+          }else {
+            this.warning('请求数据失败！')
+          }
+        }).catch(() => {
+        })
+
+      },
       handleEdit(index, row) {
-        console.log(index, row)
+
+        this.isEditForm = true;
+        this.activeName = "second";
+        this.ruleForm.popType = row.popupType.toString()
+        this.ruleForm.id = row.id
+
+        this.switchWithType(this.ruleForm.popType);
+        debugger
+        switch (this.ruleForm.popType) {
+          case "8":
+            this.ruleForm.upgradeBtn = row.buttonOneLabel;
+            this.ruleForm.notUpgradeBtn = row.buttonTwoLabel;
+            this.ruleForm.content = row.content;
+            this.ruleForm.title = row.title ;
+            this.ruleForm.version = row.appVersion;
+            break;
+          case "7":
+            this.ruleForm.upgradeBtn = row.buttonOneLabel;
+            this.ruleForm.content = row.content;
+            this.ruleForm.title = row.title;
+            this.ruleForm.version = row.appVersion;
+            break;
+          case "5":
+            this.ruleForm.textFirstBtn = row.buttonOneLabel;
+            this.ruleForm.colorFirstBtn = row.buttonOneColor;
+            this.ruleForm.urlFirstBtn = row.buttonOneCommand;
+            this.ruleForm.textSecondBtn = row.buttonTwoLabel;
+            this.ruleForm.colorSecondBtn = row.buttonTwoColor;
+            this.ruleForm.urlSecondBtn = row.buttonTwoCommand;
+            this.ruleForm.content = row.content;
+            this.ruleForm.title = row.title;
+            break;
+          case "4":
+            this.ruleForm.urlImage = row.picAdUrl;
+            this.ruleForm.imageWebUrl = row.picUrl;
+            break;
+        }
+
+        setTimeout(() =>{
+          this.isEditForm = false;
+        },0.5);
+
       },
       handleDelete(index, row) {
-        console.log(index, row)
+
+        this.operationRequest('DELETE','','/e/operate/popup/'+row.id);
       },
       onSubmit() {
         console.log('submit!')
@@ -332,6 +391,7 @@
         let body = {
           popupType: parseInt(this.ruleForm.popType),
           publishStatus: this.ruleForm.delivery ? 1 : 0,
+          id:this.ruleForm.id,
         };
 
         switch (this.ruleForm.popType) {
@@ -364,31 +424,57 @@
             break;
         }
 
+        //id没有值是创建，有值是编辑
+        if (body.id == '' || body.id == undefined) {
+
+          this.operationRequest('POST',body);
+
+        }else {
+
+          this.operationRequest('PUT',body);
+        }
+      },
+
+      //通用方法
+      operationRequest(method,body,url){
+
+        if (url == '' || url == undefined){
+            url = '/e/operate/popup/'
+        }
+        debugger
         this.$http({
-          method: 'POST',
-          url: '/e/operate/popup',
+          method: method,
+          url: url,
           body: body,
           headers: {'X-Requested-With': 'XMLHttpRequest'},
           emulateJSON: false
         }).then(function (result) {
           console.log(result.data);
           if (result.data.message.code === 0) {
+            this.requestDataList();
             this.reset();
-            // this.getAudioList()
             this.fileList = [];
             this.success('提交成功')
+
           } else {
             this.warning('提交失败')
           }
         }).catch(() => {
           this.warning('提交失败')
         })
-      },
 
+      },
       popTypeChanged(value) {
-        this.reset();
+
+        if (!this.isEditForm) {
+          this.reset();
+        }
         this.ruleForm.popType = value;
-        switch (value) {
+        this.switchWithType(value);
+      },
+      switchWithType(type){
+
+        switch (type) {
           case "8":
             this.elItem.title = true;
             this.elItem.version = true;
@@ -414,7 +500,6 @@
             break
         }
 
-
       },
       reset() {
         this.elItem.title = false;
@@ -427,6 +512,7 @@
         this.elItem.secondBtn = false;
         this.elItem.uploadImageView = false;
 
+        this.ruleForm.id = '';
         this.ruleForm.title = '';
         this.ruleForm.popType = '';
         this.ruleForm.version = '';
