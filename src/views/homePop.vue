@@ -2,100 +2,101 @@
   <el-tabs v-model="activeName" @tab-click="handleClick">
     <el-tab-pane label="弹窗管理" name="first">
       <el-table
-      :data="tableData"
-      border
+        :data="tableData"
+        border
       >
-      <el-table-column
-      label="发布时间"
-      width="150" align="center">
-      <template slot-scope="scope">
-      <!--<span style="margin-left: 10px">{{ scope.row.createAt}}</span>-->
-        {{scope.row.createAt | timeDateChange}}
-      </template>
-      </el-table-column>
-      <el-table-column
-      label="弹窗类型"
-      width="150" align="center">
-      <template slot-scope="scope">
-        <span v-if="scope.row.popupType == 8">版本升级提示</span>
-        <span v-if="scope.row.popupType == 7">强制版本升级提示</span>
-        <span v-if="scope.row.popupType == 5">文字弹窗提示</span>
-        <span v-if="scope.row.popupType == 4">图片弹窗提示</span>
-      </template>
-      </el-table-column>
+        <el-table-column
+          label="发布时间"
+          width="150" align="center">
+          <template slot-scope="scope">
+            <!--<span style="margin-left: 10px">{{ scope.row.createAt}}</span>-->
+            {{scope.row.createAt | timeDateChange}}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="弹窗类型"
+          width="150" align="center">
+          <template slot-scope="scope">
+            <span v-if="scope.row.popupType == 8">版本升级提示</span>
+            <span v-if="scope.row.popupType == 7">强制版本升级提示</span>
+            <span v-if="scope.row.popupType == 5">文字弹窗提示</span>
+            <span v-if="scope.row.popupType == 4">图片弹窗提示</span>
+          </template>
+        </el-table-column>
 
-      <el-table-column
-      label="标题"
-      width="180" align="center">
-      <template slot-scope="scope">
-      <span>{{ scope.row.title }}</span>
-      </template>
-      </el-table-column>
+        <el-table-column
+          label="标题"
+          width="180" align="center">
+          <template slot-scope="scope">
+            <span>{{ scope.row.title }}</span>
+          </template>
+        </el-table-column>
 
-      <el-table-column
-      label="内容"
-      width=""  align="center">
-      <template slot-scope="scope">
-      <span>{{ scope.row.content }}</span>
-      </template>
-      </el-table-column>
+        <el-table-column
+          label="内容"
+          width="" align="center">
+          <template slot-scope="scope">
+            <span>{{ scope.row.content }}</span>
+          </template>
+        </el-table-column>
 
-      <el-table-column
-      label="图片"
-      width="100" align="center">
-      <template slot-scope="scope">
-      <span>{{ scope.row.dataType }}</span>
-      </template>
-      </el-table-column>
+        <el-table-column
+          label="图片"
+          width="100" align="center">
+          <template slot-scope="scope">
+            <span>{{ scope.row.dataType }}</span>
+          </template>
+        </el-table-column>
 
-      <el-table-column
-      label="按钮"
-      width="100" align="center">
-      <template slot-scope="scope">
-         <span  v-if="scope.row.buttonOneLabel != undefined && scope.row.buttonTwoLabel.length != undefined ">2个</span>
-         <span  v-else-if="scope.row.buttonOneLabel!= undefined || scope.row.buttonTwoLabel!= undefined">1个</span>
-         <span  v-else>--</span>
-      </template>
-      </el-table-column>
+        <el-table-column
+          label="按钮"
+          width="100" align="center">
+          <template slot-scope="scope">
+            <span
+              v-if="scope.row.buttonOneLabel != undefined && scope.row.buttonTwoLabel.length != undefined ">2个</span>
+            <span v-else-if="scope.row.buttonOneLabel!= undefined || scope.row.buttonTwoLabel!= undefined">1个</span>
+            <span v-else>--</span>
+          </template>
+        </el-table-column>
 
-      <!--<el-table-column-->
-      <!--label="弹出频率"-->
-      <!--width="180">-->
-      <!--<template slot-scope="scope">-->
-      <!--<span style="margin-left: 10px">{{ scope.row.btnCount }}</span>-->
-      <!--</template>-->
-      <!--</el-table-column>-->
+        <!--<el-table-column-->
+        <!--label="弹出频率"-->
+        <!--width="180">-->
+        <!--<template slot-scope="scope">-->
+        <!--<span style="margin-left: 10px">{{ scope.row.btnCount }}</span>-->
+        <!--</template>-->
+        <!--</el-table-column>-->
 
-      <el-table-column
-      label="上线"
-      width="100" align="center">
-      <template slot-scope="scope">
-      <el-switch
-      v-model="scope.row.publishStatus==1?true:false"
-      value="1"
-      active-color="#13ce66"
-      inactive-color="#ff4949"
-      @change="changeStatus($event,scope.row,scope.$index)"
-      >
-      </el-switch>
-      </template>
-      </el-table-column>
+        <el-table-column
+          label="上线"
+          width="100" align="center">
+          <template slot-scope="scope">
+            <el-switch
+              v-model="scope.row.publishStatus==1?true:false"
+              value="1"
+              active-color="#13ce66"
+              inactive-color="#ff4949"
+              @change="changeStatus($event,scope.row,scope.$index)"
+            >
+            </el-switch>
+          </template>
+        </el-table-column>
 
 
-      <el-table-column label="操作"
-                       width="150" align="center">
-      <template slot-scope="scope">
-      <el-button
-      size="mini"
-      @click="handleEdit(scope.$index, scope.row)">编辑
-      </el-button>
-      <el-button
-      size="mini"
-      type="danger"
-      @click="handleDelete(scope.$index, scope.row)">删除
-      </el-button>
-      </template>
-      </el-table-column>
+        <el-table-column label="操作"
+                         width="150" align="center">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="handleEdit(scope.$index, scope.row)">编辑
+            </el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              @click="handleDelete(scope.$index, scope.row)">删除
+            </el-button>
+          </template>
+        </el-table-column>
       </el-table>
       <!--分页-->
       <!--<div class="block" style="float:right;margin:10px 18px">-->
@@ -226,7 +227,7 @@
     name: 'homePop',
     data() {
       return {
-        isEditForm:false,
+        isEditForm: false,
         activeName: 'first',
         value: true,
         fileList: [], // 上传音频列表
@@ -300,7 +301,7 @@
     },
     methods: {
 
-      changeStatus(e,row,index){
+      changeStatus(e, row, index) {
 
         debugger
 
@@ -313,7 +314,7 @@
       },
 
       //请求数据列表
-      requestDataList(){
+      requestDataList() {
 
         this.$http({
           method: 'GET',
@@ -326,7 +327,7 @@
           if (result.data.message.code === 0) {
 
             this.tableData = result.data.data;
-          }else {
+          } else {
             this.warning('请求数据失败！')
           }
         }).catch(() => {
@@ -347,7 +348,7 @@
             this.ruleForm.upgradeBtn = row.buttonOneLabel;
             this.ruleForm.notUpgradeBtn = row.buttonTwoLabel;
             this.ruleForm.content = row.content;
-            this.ruleForm.title = row.title ;
+            this.ruleForm.title = row.title;
             this.ruleForm.version = row.appVersion;
             break;
           case "7":
@@ -372,14 +373,14 @@
             break;
         }
 
-        setTimeout(() =>{
+        setTimeout(() => {
           this.isEditForm = false;
-        },0.5);
+        }, 0.5);
 
       },
       handleDelete(index, row) {
 
-        this.operationRequest('DELETE','','/e/operate/popup/'+row.id);
+        this.operationRequest('DELETE', '', '/e/operate/popup/' + row.id);
       },
       onSubmit() {
         console.log('submit!')
@@ -388,6 +389,7 @@
         let body = {
           popupType: parseInt(this.ruleForm.popType),
           publishStatus: this.ruleForm.delivery ? 1 : 0,
+          id: this.ruleForm.id
         };
 
         switch (this.ruleForm.popType) {
@@ -422,25 +424,25 @@
 
         //id没有值是创建，有值是编辑
         if (body.id == '' || body.id == undefined) {
-
+          delete body.id;
           if (!this.paramsValidate(body)) {
             this.warning('请填写全部必须参数!');
             return;
           }
 
-          this.operationRequest('POST',body);
+          this.operationRequest('POST', body);
 
-        }else {
-          body.id = this.ruleForm.id;
-          this.operationRequest('PUT',body);
+        } else {
+
+          this.operationRequest('PUT', body);
         }
       },
 
       //通用方法
-      operationRequest(method,body,url){
+      operationRequest(method, body, url) {
 
-        if (url == '' || url == undefined){
-            url = '/e/operate/popup/'
+        if (url == '' || url == undefined) {
+          url = '/e/operate/popup/'
         }
 
         this.$http({
@@ -473,7 +475,7 @@
         this.ruleForm.popType = value;
         this.switchWithType(value);
       },
-      switchWithType(type){
+      switchWithType(type) {
 
         switch (type) {
           case "8":
