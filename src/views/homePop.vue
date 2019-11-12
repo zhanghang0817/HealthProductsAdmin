@@ -45,7 +45,8 @@
       label="图片"
       width="100" align="center">
       <template slot-scope="scope">
-      <span>{{ scope.row.dataType }}</span>
+        <span v-if="scope.row.picUrl!= undefined"><a :href="scope.row.picUrl" target="_blank" rel="noopener noreferrer">{{scope.row.picUrl}}</a></span>
+        <span v-else>--</span>
       </template>
       </el-table-column>
 
@@ -515,7 +516,7 @@
         //id没有值是创建，有值是编辑
         if (body.id == '' || body.id == undefined) {
           delete body.id;
-          
+
           if (!this.paramsValidate(body)) {
             this.warning('请填写全部必须参数!');
             return;
