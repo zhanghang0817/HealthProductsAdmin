@@ -52,8 +52,8 @@
       label="按钮"
       width="100" align="center">
       <template slot-scope="scope">
-         <span  v-if="scope.row.buttonOneLabel != undefined && scope.row.buttonTwoLabel.length != undefined ">2个</span>
-         <span  v-else-if="scope.row.buttonOneLabel!= undefined || scope.row.buttonTwoLabel!= undefined">1个</span>
+         <span  v-if="scope.row.buttonOneLabel!= undefined && scope.row.buttonTwoLabel!= undefined ">2个</span>
+         <span  v-if="scope.row.buttonOneLabel!= undefined || scope.row.buttonTwoLabel!= undefined">1个</span>
          <span  v-else>--</span>
       </template>
       </el-table-column>
@@ -428,7 +428,7 @@
             this.warning('请填写全部必须参数!');
             return;
           }
-          
+
           this.operationRequest('POST',body);
 
         }else {
