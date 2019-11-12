@@ -410,9 +410,6 @@
             body.buttonOneLabel = this.ruleForm.textFirstBtn;
             body.buttonOneColor = this.ruleForm.colorFirstBtn;
             body.buttonOneCommand = this.ruleForm.urlFirstBtn;
-            body.buttonTwoLabel = this.ruleForm.textSecondBtn;
-            body.buttonTwoColor = this.ruleForm.colorSecondBtn;
-            body.buttonTwoCommand = this.ruleForm.urlSecondBtn;
             body.content = this.ruleForm.content;
             body.title = this.ruleForm.title;
             break;
@@ -428,6 +425,12 @@
           if (!this.paramsValidate(body)) {
             this.warning('请填写全部必须参数!');
             return;
+          }
+
+          if (this.ruleForm.popType == "5") {
+            body.buttonTwoLabel = this.ruleForm.textSecondBtn;
+            body.buttonTwoColor = this.ruleForm.colorSecondBtn;
+            body.buttonTwoCommand = this.ruleForm.urlSecondBtn;
           }
 
           this.operationRequest('POST', body);
