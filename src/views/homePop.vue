@@ -55,7 +55,7 @@
       width="100" align="center">
       <template slot-scope="scope">
          <span  v-if="scope.row.buttonOneLabel!= undefined && scope.row.buttonTwoLabel!= undefined ">2个</span>
-         <span  v-if="scope.row.buttonOneLabel!= undefined || scope.row.buttonTwoLabel!= undefined">1个</span>
+         <span  v-else-if="scope.row.buttonOneLabel!= undefined || scope.row.buttonTwoLabel!= undefined">1个</span>
          <span  v-else>--</span>
       </template>
       </el-table-column>
