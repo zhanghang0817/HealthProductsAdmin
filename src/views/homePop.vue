@@ -242,8 +242,9 @@
         </el-form-item>
 
         <el-form-item label="图片链接：" prop="urlImage" v-if="elItem.imageUrl">
-          <el-col :span="6">
+          <el-col :span="12">
             <el-input v-model="ruleForm.urlImage" placeholder="请输入图片链接"></el-input>
+            <div style="font-size: 8px">跳转H5实例：{"pageId":"webView","url":"http://www.hczq.com/","title":"华创证劵"}</div>
           </el-col>
         </el-form-item>
 
@@ -265,9 +266,10 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="6">
+          <el-col :span="12">
             <el-form-item prop="urlFirstBtn">
               <el-input v-model="ruleForm.urlFirstBtn" placeholder="请输入按钮指令/链接"></el-input>
+              <div style="font-size: 8px">跳转H5实例：{"pageId":"webView","url":"http://www.hczq.com/","title":"华创证劵"}</div>
             </el-form-item>
           </el-col>
         </el-row>
@@ -286,9 +288,10 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="6">
+          <el-col :span="12">
             <el-form-item>
               <el-input v-model="ruleForm.urlSecondBtn" placeholder="请输入按钮指令/链接"></el-input>
+              <div style="font-size: 8px">跳转H5实例：{"pageId":"webView","url":"http://www.hczq.com/","title":"华创证劵"}</div>
             </el-form-item>
           </el-col>
         </el-row>
