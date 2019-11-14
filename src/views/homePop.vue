@@ -524,8 +524,6 @@
             return;
           }
 
-          this.operationRequest('POST', body);
-
           if (this.ruleForm.popType == "5") {
             body.buttonTwoLabel = this.ruleForm.textSecondBtn;
             body.buttonTwoColor = this.ruleForm.colorSecondBtn;
