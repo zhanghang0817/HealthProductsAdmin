@@ -545,7 +545,7 @@
       operationRequest(method, body, url) {
 
         if (url == '' || url == undefined) {
-          url = '/e/operate/popup/'
+          url = '/e/operate/popup'
         }
 
         this.$http({
