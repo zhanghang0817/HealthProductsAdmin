@@ -6,150 +6,151 @@
         border
       >
 
-      <el-table-column
-      label="发布时间"
-      width="150" align="center">
-      <template slot-scope="scope">
-      <!--<span style="margin-left: 10px">{{ scope.row.createAt}}</span>-->
-        {{scope.row.createAt | timeDateChange}}
-      </template>
-      </el-table-column>
-      <el-table-column
-      label="弹窗类型"
-      width="150" align="center">
-      <template slot-scope="scope">
-        <span v-if="scope.row.popupType == 8">版本升级提示</span>
-        <span v-if="scope.row.popupType == 7">强制版本升级提示</span>
-        <span v-if="scope.row.popupType == 5">文字弹窗提示</span>
-        <span v-if="scope.row.popupType == 4">图片弹窗提示</span>
-      </template>
-      </el-table-column>
+        <el-table-column
+          label="发布时间"
+          width="150" align="center">
+          <template slot-scope="scope">
+            <!--<span style="margin-left: 10px">{{ scope.row.createAt}}</span>-->
+            {{scope.row.createAt | timeDateChange}}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="弹窗类型"
+          width="150" align="center">
+          <template slot-scope="scope">
+            <span v-if="scope.row.popupType == 8">版本升级提示</span>
+            <span v-if="scope.row.popupType == 7">强制版本升级提示</span>
+            <span v-if="scope.row.popupType == 5">文字弹窗提示</span>
+            <span v-if="scope.row.popupType == 4">图片弹窗提示</span>
+          </template>
+        </el-table-column>
 
-      <el-table-column
-      label="标题"
-      width="180" align="center">
-      <template slot-scope="scope">
-      <span>{{ scope.row.title }}</span>
-      </template>
-      </el-table-column>
+        <el-table-column
+          label="标题"
+          width="180" align="center">
+          <template slot-scope="scope">
+            <span>{{ scope.row.title }}</span>
+          </template>
+        </el-table-column>
 
-      <el-table-column
-      label="内容"
-      width=""  align="center">
-      <template slot-scope="scope">
-      <span>{{ scope.row.content }}</span>
-      </template>
-      </el-table-column>
+        <el-table-column
+          label="内容"
+          width="" align="center">
+          <template slot-scope="scope">
+            <span>{{ scope.row.content }}</span>
+          </template>
+        </el-table-column>
 
-      <el-table-column
-      label="图片"
-      width="100" align="center">
-      <template slot-scope="scope">
-        <span v-if="scope.row.picUrl!= undefined"><a :href="scope.row.picUrl" target="_blank" rel="noopener noreferrer">{{scope.row.picUrl}}</a></span>
-        <span v-else>--</span>
-      </template>
-      </el-table-column>
+        <el-table-column
+          label="图片"
+          width="100" align="center">
+          <template slot-scope="scope">
+            <span v-if="scope.row.picUrl!= undefined"><a :href="scope.row.picUrl" target="_blank"
+                                                         rel="noopener noreferrer">{{scope.row.picUrl}}</a></span>
+            <span v-else>--</span>
+          </template>
+        </el-table-column>
 
-      <el-table-column
-      label="按钮"
-      width="100" align="center">
-      <template slot-scope="scope">
-         <span  v-if="scope.row.buttonOneLabel!= undefined && scope.row.buttonTwoLabel!= undefined ">2个</span>
-         <span  v-else-if="scope.row.buttonOneLabel!= undefined || scope.row.buttonTwoLabel!= undefined">1个</span>
-         <span  v-else>--</span>
-      </template>
-      </el-table-column>
-
-      <!--<el-table-column-->
-      <!--label="弹出频率"-->
-      <!--width="180">-->
-      <!--<template slot-scope="scope">-->
-      <!--<span style="margin-left: 10px">{{ scope.row.btnCount }}</span>-->
-      <!--</template>-->
-      <!--</el-table-column>-->
-
-      <el-table-column
-      label="上线"
-      width="100" align="center">
-      <template slot-scope="scope">
-      <el-switch
-      v-model="scope.row.publishStatus==1?true:false"
-      value="1"
-      active-color="#13ce66"
-      inactive-color="#ff4949"
-      @change="changeStatus($event,scope.row,scope.$index)"
-      >
-      </el-switch>
-      </template>
-      </el-table-column>
-
-
-      <el-table-column label="操作"
-                       width="150" align="center">
-      <template slot-scope="scope">
-      <el-button
-      size="mini"
-      @click="handleEdit(scope.$index, scope.row)">编辑
-      </el-button>
-      <el-button
-      size="mini"
-      type="danger"
-      @click="handleDelete(scope.$index, scope.row)">删除
-      </el-button>
-      </template>
-      </el-table-column>
+        <el-table-column
+          label="按钮"
+          width="100" align="center">
+          <template slot-scope="scope">
+            <span v-if="scope.row.buttonOneLabel!= undefined && scope.row.buttonTwoLabel!= undefined ">2个</span>
+            <span v-else-if="scope.row.buttonOneLabel!= undefined || scope.row.buttonTwoLabel!= undefined">1个</span>
+            <span v-else>--</span>
+          </template>
+        </el-table-column>
 
         <!--<el-table-column-->
-          <!--label="发布时间"-->
-          <!--width="150" align="center">-->
-          <!--<template slot-scope="scope">-->
-            <!--{{scope.row.createAt | timeDateChange}}-->
-          <!--</template>-->
-        <!--</el-table-column>-->
-        <!--<el-table-column-->
-          <!--label="弹窗类型"-->
-          <!--width="150" align="center">-->
-          <!--<template slot-scope="scope">-->
-            <!--<span v-if="scope.row.popupType == 8">版本升级提示</span>-->
-            <!--<span v-if="scope.row.popupType == 7">强制版本升级提示</span>-->
-            <!--<span v-if="scope.row.popupType == 5">文字弹窗提示</span>-->
-            <!--<span v-if="scope.row.popupType == 4">图片弹窗提示</span>-->
-          <!--</template>-->
+        <!--label="弹出频率"-->
+        <!--width="180">-->
+        <!--<template slot-scope="scope">-->
+        <!--<span style="margin-left: 10px">{{ scope.row.btnCount }}</span>-->
+        <!--</template>-->
         <!--</el-table-column>-->
 
+        <el-table-column
+          label="上线"
+          width="100" align="center">
+          <template slot-scope="scope">
+            <el-switch
+              v-model="scope.row.publishStatus==1?true:false"
+              value="1"
+              active-color="#13ce66"
+              inactive-color="#ff4949"
+              @change="changeStatus($event,scope.row,scope.$index)"
+            >
+            </el-switch>
+          </template>
+        </el-table-column>
+
+
+        <el-table-column label="操作"
+                         width="150" align="center">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="handleEdit(scope.$index, scope.row)">编辑
+            </el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              @click="handleDelete(scope.$index, scope.row)">删除
+            </el-button>
+          </template>
+        </el-table-column>
+
         <!--<el-table-column-->
-          <!--label="标题"-->
-          <!--width="180" align="center">-->
-          <!--<template slot-scope="scope">-->
-            <!--<span>{{ scope.row.title }}</span>-->
-          <!--</template>-->
+        <!--label="发布时间"-->
+        <!--width="150" align="center">-->
+        <!--<template slot-scope="scope">-->
+        <!--{{scope.row.createAt | timeDateChange}}-->
+        <!--</template>-->
+        <!--</el-table-column>-->
+        <!--<el-table-column-->
+        <!--label="弹窗类型"-->
+        <!--width="150" align="center">-->
+        <!--<template slot-scope="scope">-->
+        <!--<span v-if="scope.row.popupType == 8">版本升级提示</span>-->
+        <!--<span v-if="scope.row.popupType == 7">强制版本升级提示</span>-->
+        <!--<span v-if="scope.row.popupType == 5">文字弹窗提示</span>-->
+        <!--<span v-if="scope.row.popupType == 4">图片弹窗提示</span>-->
+        <!--</template>-->
         <!--</el-table-column>-->
 
         <!--<el-table-column-->
-          <!--label="内容"-->
-          <!--width="" align="center">-->
-          <!--<template slot-scope="scope">-->
-            <!--<span>{{ scope.row.content }}</span>-->
-          <!--</template>-->
+        <!--label="标题"-->
+        <!--width="180" align="center">-->
+        <!--<template slot-scope="scope">-->
+        <!--<span>{{ scope.row.title }}</span>-->
+        <!--</template>-->
         <!--</el-table-column>-->
 
         <!--<el-table-column-->
-          <!--label="图片"-->
-          <!--width="100" align="center">-->
-          <!--<template slot-scope="scope">-->
-            <!--<span>{{ scope.row.dataType }}</span>-->
-          <!--</template>-->
+        <!--label="内容"-->
+        <!--width="" align="center">-->
+        <!--<template slot-scope="scope">-->
+        <!--<span>{{ scope.row.content }}</span>-->
+        <!--</template>-->
         <!--</el-table-column>-->
 
         <!--<el-table-column-->
-          <!--label="按钮"-->
-          <!--width="100" align="center">-->
-          <!--<template slot-scope="scope">-->
-            <!--<span-->
-              <!--v-if="scope.row.buttonOneLabel != undefined && scope.row.buttonTwoLabel.length != undefined ">2个</span>-->
-            <!--<span v-else-if="scope.row.buttonOneLabel!= undefined || scope.row.buttonTwoLabel!= undefined">1个</span>-->
-            <!--<span v-else>&#45;&#45;</span>-->
-          <!--</template>-->
+        <!--label="图片"-->
+        <!--width="100" align="center">-->
+        <!--<template slot-scope="scope">-->
+        <!--<span>{{ scope.row.dataType }}</span>-->
+        <!--</template>-->
+        <!--</el-table-column>-->
+
+        <!--<el-table-column-->
+        <!--label="按钮"-->
+        <!--width="100" align="center">-->
+        <!--<template slot-scope="scope">-->
+        <!--<span-->
+        <!--v-if="scope.row.buttonOneLabel != undefined && scope.row.buttonTwoLabel.length != undefined ">2个</span>-->
+        <!--<span v-else-if="scope.row.buttonOneLabel!= undefined || scope.row.buttonTwoLabel!= undefined">1个</span>-->
+        <!--<span v-else>&#45;&#45;</span>-->
+        <!--</template>-->
         <!--</el-table-column>-->
 
         <!--&lt;!&ndash;<el-table-column&ndash;&gt;-->
@@ -161,34 +162,34 @@
         <!--&lt;!&ndash;</el-table-column>&ndash;&gt;-->
 
         <!--<el-table-column-->
-          <!--label="上线"-->
-          <!--width="100" align="center">-->
-          <!--<template slot-scope="scope">-->
-            <!--<el-switch-->
-              <!--v-model="scope.row.publishStatus==1?true:false"-->
-              <!--value="1"-->
-              <!--active-color="#13ce66"-->
-              <!--inactive-color="#ff4949"-->
-              <!--@change="changeStatus($event,scope.row,scope.$index)"-->
-            <!--&gt;-->
-            <!--</el-switch>-->
-          <!--</template>-->
+        <!--label="上线"-->
+        <!--width="100" align="center">-->
+        <!--<template slot-scope="scope">-->
+        <!--<el-switch-->
+        <!--v-model="scope.row.publishStatus==1?true:false"-->
+        <!--value="1"-->
+        <!--active-color="#13ce66"-->
+        <!--inactive-color="#ff4949"-->
+        <!--@change="changeStatus($event,scope.row,scope.$index)"-->
+        <!--&gt;-->
+        <!--</el-switch>-->
+        <!--</template>-->
         <!--</el-table-column>-->
 
 
         <!--<el-table-column label="操作"-->
-                         <!--width="150" align="center">-->
-          <!--<template slot-scope="scope">-->
-            <!--<el-button-->
-              <!--size="mini"-->
-              <!--@click="handleEdit(scope.$index, scope.row)">编辑-->
-            <!--</el-button>-->
-            <!--<el-button-->
-              <!--size="mini"-->
-              <!--type="danger"-->
-              <!--@click="handleDelete(scope.$index, scope.row)">删除-->
-            <!--</el-button>-->
-          <!--</template>-->
+        <!--width="150" align="center">-->
+        <!--<template slot-scope="scope">-->
+        <!--<el-button-->
+        <!--size="mini"-->
+        <!--@click="handleEdit(scope.$index, scope.row)">编辑-->
+        <!--</el-button>-->
+        <!--<el-button-->
+        <!--size="mini"-->
+        <!--type="danger"-->
+        <!--@click="handleDelete(scope.$index, scope.row)">删除-->
+        <!--</el-button>-->
+        <!--</template>-->
         <!--</el-table-column>-->
 
       </el-table>
@@ -220,9 +221,10 @@
             :on-preview="handlePreview"
             :on-remove="handleRemove"
             :on-success="handleSuccess"
+            :before-upload="beforeAvatarUpload"
             :file-list="fileList">
             <el-button size="small" type="primary">点击上传</el-button>
-            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过2MB</div>
           </el-upload>
         </el-form-item>
 
@@ -240,8 +242,9 @@
         </el-form-item>
 
         <el-form-item label="图片链接：" prop="urlImage" v-if="elItem.imageUrl">
-          <el-col :span="6">
+          <el-col :span="12">
             <el-input v-model="ruleForm.urlImage" placeholder="请输入图片链接"></el-input>
+            <div style="font-size: 8px">跳转H5实例：{"pageId":"webView","url":"http://www.hczq.com/","title":"华创证劵"}</div>
           </el-col>
         </el-form-item>
 
@@ -263,9 +266,10 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="6">
+          <el-col :span="12">
             <el-form-item prop="urlFirstBtn">
               <el-input v-model="ruleForm.urlFirstBtn" placeholder="请输入按钮指令/链接"></el-input>
+              <div style="font-size: 8px">跳转H5实例：{"pageId":"webView","url":"http://www.hczq.com/","title":"华创证劵"}</div>
             </el-form-item>
           </el-col>
         </el-row>
@@ -284,9 +288,10 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="6">
+          <el-col :span="12">
             <el-form-item>
               <el-input v-model="ruleForm.urlSecondBtn" placeholder="请输入按钮指令/链接"></el-input>
+              <div style="font-size: 8px">跳转H5实例：{"pageId":"webView","url":"http://www.hczq.com/","title":"华创证劵"}</div>
             </el-form-item>
           </el-col>
         </el-row>
@@ -539,7 +544,7 @@
       operationRequest(method, body, url) {
 
         if (url == '' || url == undefined) {
-          url = '/e/operate/popup/'
+          url = '/e/operate/popup'
         }
 
         this.$http({
@@ -646,22 +651,18 @@
       },
       // 上传音频限制
       beforeAvatarUpload(file) {
-//        console.log(file)
-        let isJPG
-        if (navigator.userAgent.indexOf('Firefox') > -1) {
-          isJPG = /\.(mp3)$/.test(file.name)
-//          console.log(isJPG)
-        } else {
-          isJPG = file.type === 'audio/mp3'
+        const isJPG = file.type === 'image/jpeg';
+        const isPNG = file.type === 'image/png';
+        const isPG = (isJPG || isPNG);                                      //限制图片格式为jpg / png
+        const isLt2M = file.size / 1024 / 1024 < 2;                         //限制图片大小
+        if (!isPG) {
+          this.$message.error('上传图片只能是 JPG 或 PNG 格式!');
         }
-        const isLt50M = file.size / 1024 / 1024 < 50
-        if (!isJPG) {
-          this.$message.error('上传音频只能是 mp3 格式!')
+        if (!isLt2M) {
+          this.$message.error('上传图片大小不能超过 2MB!');
         }
-        if (!isLt50M) {
-          this.$message.error('上传音频大小不能超过 50MB!')
-        }
-        return isJPG && isLt50M
+        return isPG && isLt2M;
+
       },
       success(msg) {
         this.$message({

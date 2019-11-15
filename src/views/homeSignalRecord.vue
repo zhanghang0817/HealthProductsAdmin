@@ -80,6 +80,9 @@
         <el-table-column  prop="title" label="标题" align="left">
         </el-table-column>
 
+        <el-table-column  prop="preSignalType" label="原信号类别" align="center" width="180">
+        </el-table-column>
+
 
         <!--删除：		afterSignalType:未知信号-->
         <!--撤销删除：	产业、焦点，preSignalType:未知信号-->
@@ -336,6 +339,7 @@
             }
           }else {
             _this.users = result.body.data.list
+
             this.totalCount = result.body.data.totalCount
             this.requestParams.cp = result.body.data.currentPage
           }
