@@ -78,6 +78,7 @@
               value="1"
               active-color="#13ce66"
               inactive-color="#ff4949"
+
               @change="changeStatus($event,scope.row,scope.$index)"
             >
             </el-switch>
@@ -202,7 +203,7 @@
     </el-tab-pane>
 
 
-    <el-tab-pane label="发布音频" name="second">
+    <el-tab-pane label="发布弹窗" name="second">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
         <el-form-item label="弹窗类型：" prop="region">
           <el-select v-model="ruleForm.popType" placeholder="请选择弹窗类型" @change="popTypeChanged">
@@ -402,7 +403,17 @@
 
       changeStatus(e, row, index) {
 
-        debugger
+        var body = {};
+        row.publishStatus = e==true?1:0;
+        Object.keys(row).forEach(function(key){
+
+          if (row[key] != undefined || row[key] != null){
+            console.log(key,row[key]);
+            body[key] = row[key];
+          }
+        });
+
+        this.operationRequest('PUT', body);
 
       },
       handleClick(tab, event) {
@@ -439,6 +450,8 @@
         this.activeName = "second";
         this.ruleForm.popType = row.popupType.toString()
         this.ruleForm.id = row.id
+
+        this.ruleForm.delivery = row.publishStatus == 1?true:false;
 
         this.switchWithType(this.ruleForm.popType);
         debugger
@@ -520,7 +533,8 @@
 
         //id没有值是创建，有值是编辑
         if (body.id == '' || body.id == undefined) {
-          delete body.id;
+
+           delete body.id;
 
           if (!this.paramsValidate(body)) {
             this.warning('请填写全部必须参数!');
@@ -547,6 +561,7 @@
           url = '/e/operate/popup'
         }
 
+        debugger
         this.$http({
           method: method,
           url: url,
