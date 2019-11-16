@@ -55,7 +55,7 @@
           label="按钮"
           width="100" align="center">
           <template slot-scope="scope">
-            <span v-if="scope.row.buttonOneLabel!= undefined && scope.row.buttonTwoLabel!= undefined ">2个</span>
+            <span v-if="scope.row.buttonOneLabel!= undefined && scope.row.buttonTwoLabel!= undefined && scope.row.buttonOneLabel!= '' && scope.row.buttonTwoLabel!= '' ">2个</span>
             <span v-else-if="scope.row.buttonOneLabel!= undefined || scope.row.buttonTwoLabel!= undefined">1个</span>
             <span v-else>--</span>
           </template>
@@ -437,6 +437,7 @@
           if (result.data.message.code === 0) {
 
             this.tableData = result.data.data;
+            debugger
           } else {
             this.warning('请求数据失败！')
           }
