@@ -37,7 +37,7 @@
           label="内容"
           width="" align="center">
           <template slot-scope="scope">
-            <span>{{ scope.row.content }}</span>
+            <span style="overflow: hidden;-webkit-line-clamp: 2;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;">{{ scope.row.content}}</span>
           </template>
         </el-table-column>
 
@@ -45,7 +45,7 @@
           label="图片"
           width="100" align="center">
           <template slot-scope="scope">
-            <span v-if="scope.row.picUrl!= undefined"><a :href="scope.row.picUrl" target="_blank"
+            <span v-if="scope.row.picUrl!= undefined" style="overflow: hidden;-webkit-line-clamp: 3;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical;"><a :href="scope.row.picUrl" target="_blank"
                                                          rel="noopener noreferrer">{{scope.row.picUrl}}</a></span>
             <span v-else>--</span>
           </template>
@@ -194,14 +194,12 @@
         <!--</el-table-column>-->
 
       </el-table>
-      <!--分页-->
-      <!--<div class="block" style="float:right;margin:10px 18px">-->
-      <!--<el-button type="primary" :disabled="!hasProPage" @click="nextPage('-1')">上一页</el-button>-->
-      <!--第{{currentPage}}页-->
-      <!--<el-button type="primary" :disabled="!hasNextPage" @click="nextPage('1')">下一页</el-button>-->
-      <!--</div>-->
+      <div class="block" style="float:right;margin:10px 18px">
+      <el-button type="primary" :disabled="!hasProPage" @click="nextPage('-1')">上一页</el-button>
+      第{{currentPage}}页
+      <el-button type="primary" :disabled="!hasNextPage" @click="nextPage('1')">下一页</el-button>
+      </div>
     </el-tab-pane>
-
 
     <el-tab-pane label="发布弹窗" name="second">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
@@ -333,6 +331,9 @@
     name: 'homePop',
     data() {
       return {
+        currentPage:1,
+        hasNextPage: false,
+        hasProPage: false,
         isEditForm: false,
         activeName: 'first',
         value: true,
@@ -428,13 +429,20 @@
           this.fileList = [];
         }
       },
-
+      nextPage: function (val) {
+        this.currentPage = Number(this.currentPage) + Number(val)
+        if (this.currentPage <= 1) {
+          this.hasProPage = false
+          this.currentPage = 1
+        }
+        this.requestDataList()
+      },
       //请求数据列表
       requestDataList() {
 
         this.$http({
           method: 'GET',
-          url: '/e/operate/popup',
+          url: '/e/operate/popup'+'?cp='+this.currentPage +'&ps='+8,
           body: '',
           headers: {'X-Requested-With': 'XMLHttpRequest'},
           emulateJSON: false
@@ -442,8 +450,16 @@
 
           if (result.data.message.code === 0) {
 
-            this.tableData = result.data.data;
-            debugger
+            this.tableData = result.data.data.popups;
+            this.currentPage = result.data.data.currentPage;
+            this.hasNextPage = result.data.data.hasNextPage
+            if (result.data.data.currentPage === 1 || !result.data.data.currentPage) {
+              this.hasProPage = false
+              this.currentPage = 1
+            } else {
+              this.hasProPage = true
+            }
+
           } else {
             this.warning('请求数据失败！')
           }
@@ -458,7 +474,6 @@
         this.ruleForm.popType = row.popupType.toString()
         this.ruleForm.id = row.id
 
-        debugger
 
         this.ruleForm.delivery = row.publishStatus == 1?true:false;
 
@@ -544,8 +559,6 @@
         if (body.id == '' || body.id == undefined) {
 
            delete body.id;
-
-
 
           if (!this.paramsValidate(body)) {
             this.warning('请填写全部必须参数!');
