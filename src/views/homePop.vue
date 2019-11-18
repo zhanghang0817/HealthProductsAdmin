@@ -242,6 +242,12 @@
           </el-col>
         </el-form-item>
 
+        <el-form-item label="上传图片链接：" v-if="ruleForm.imageWebUrl!= undefined && ruleForm.imageWebUrl!= ''">
+         <span>
+           <a :href="ruleForm.imageWebUrl" target="_blank" rel="noopener noreferrer">{{ruleForm.imageWebUrl}}</a>
+         </span>
+        </el-form-item>
+
         <el-form-item label="图片链接：" prop="urlImage" v-if="elItem.imageUrl">
           <el-col :span="12">
             <el-input v-model="ruleForm.urlImage" placeholder="请输入图片链接"></el-input>
@@ -452,6 +458,8 @@
         this.ruleForm.popType = row.popupType.toString()
         this.ruleForm.id = row.id
 
+        debugger
+
         this.ruleForm.delivery = row.publishStatus == 1?true:false;
 
         this.switchWithType(this.ruleForm.popType);
@@ -501,7 +509,7 @@
       submitForm() {
         let body = {
           popupType: parseInt(this.ruleForm.popType),
-          publishStatus: this.ruleForm.delivery ? 1 : 0,
+          publishStatus: this.ruleForm.delivery ? '1' : '0',
           id: this.ruleForm.id
         };
 
@@ -536,6 +544,8 @@
         if (body.id == '' || body.id == undefined) {
 
            delete body.id;
+
+
 
           if (!this.paramsValidate(body)) {
             this.warning('请填写全部必须参数!');
