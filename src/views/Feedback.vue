@@ -40,7 +40,7 @@
     </el-table>
     <!--编辑页面-->
     <!--编辑界面-->
-    <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false" top="2%" v-loading="editListLoading">
+    <el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false" :visible.sync="editFormVisible" top="2%" v-loading="editListLoading">
       <el-form :model="editForm" label-width="100px" ref="editForm">
         <el-form-item label="序号：" prop="id">
           {{editForm.id}}
