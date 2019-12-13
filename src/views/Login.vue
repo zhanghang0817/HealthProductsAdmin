@@ -1,18 +1,5 @@
 <template>
   <div>
-    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="0px" class="demo-ruleForm login-container">
-      <h3 class="title">e智通运营数据后台登录</h3>
-      <el-form-item prop="account">
-        <el-input type="text" v-model="ruleForm.account" auto-complete="off" placeholder="账号"></el-input>
-      </el-form-item>
-      <el-form-item prop="checkPass">
-        <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off" placeholder="密码"></el-input>
-      </el-form-item>
-      <el-checkbox v-model="checked" class="remember">记住密码</el-checkbox>
-      <el-form-item style="width:100%;">
-        <el-button type="primary" style="width:100%;" @click="submitForm('ruleForm')">登录</el-button>
-      </el-form-item>
-    </el-form>
     <el-dialog title="请先修改初始密码" v-model="changePassword" size="tiny">
       <el-col :span="22">
         <el-form :model="changePassRule" :rules="passRules" ref="changePassRule" label-width="100px"
@@ -33,6 +20,19 @@
             <el-button type="primary" @click="changePassword=false">取 消</el-button>
           </span>
     </el-dialog>
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="0px" class="demo-ruleForm login-container">
+      <h3 class="title">e智通运营数据后台登录</h3>
+      <el-form-item prop="account">
+        <el-input type="text" v-model="ruleForm.account" auto-complete="off" placeholder="账号"></el-input>
+      </el-form-item>
+      <el-form-item prop="checkPass">
+        <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off" placeholder="密码"></el-input>
+      </el-form-item>
+      <el-checkbox v-model="checked" class="remember">记住密码</el-checkbox>
+      <el-form-item style="width:100%;">
+        <el-button type="primary" style="width:100%;" @click="submitForm('ruleForm')">登录</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 <script>
@@ -118,7 +118,7 @@ export default {
             headers: {'X-Requested-With': 'XMLHttpRequest'},
             emulateJSON: true
           }).then(function (result) {
-            if (result.body.message.code === 0) {
+            if (result.data.message.code === 0) {
               this.$message({
                 message: '登陆成功',
                 type: 'success'
