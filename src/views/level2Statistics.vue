@@ -281,6 +281,12 @@
           </el-table-column>
           <el-table-column
             align="center"
+            prop="name"
+            label="客户姓名"
+            width="110">
+          </el-table-column>
+          <el-table-column
+            align="center"
             prop="deptName"
             label="中心营业部/分公司"
             width="230">
@@ -357,6 +363,8 @@
           season: '',
           year: new Date().getFullYear(),
           showValue: '',
+          hisMonthData: '',
+          hisYearData: '',
           type_time_value: '按月统计',
           type_time: [{
             value: '按月统计'
@@ -429,26 +437,44 @@
         },
         type_time_value (curValue, oldValue) {
           if (curValue === '按月统计') {
+            if (this.hisMonthData !== '') {
+              let arr = this.hisMonthData.split('-')
+              this.requestParams.year = arr[0]
+              this.requestParams.month = arr[1]
+            }
             this.seasonShow = false
             this.monthShow = true
             this.yearShow = false
           } else if (curValue === '按季度统计') {
+            if (this.season !== '') {
+              this.selectSeason(this.season - 1)
+            }
             this.seasonShow = true
             this.monthShow = false
             this.yearShow = false
           } else if (curValue === '按年统计') {
+            if (this.hisYearData !== '') {
+              this.requestParams.year = this.hisYearData
+              this.requestParams.month = undefined
+              this.requestParams.quarter = undefined
+            }
             this.seasonShow = false
             this.monthShow = false
             this.yearShow = true
           }
         },
         monthData (curValue, oldValue) {
-          this.requestParams.year = curValue.getFullYear()
-          this.requestParams.month = curValue.getMonth() + 1
+          this.hisMonthData = curValue
+          let arr = curValue.split('-')
+          this.requestParams.year = arr[0]
+          this.requestParams.month = arr[1]
+          // this.requestParams.year = curValue.getFullYear()
+          // this.requestParams.month = curValue.getMonth()
           this.requestParams.quarter = undefined
         },
         yearData (curValue, oldValue) {
-          this.requestParams.year = curValue.getFullYear()
+          this.hisYearData = curValue
+          this.requestParams.year = curValue
           this.requestParams.month = undefined
           this.requestParams.quarter = undefined
         },
@@ -468,12 +494,12 @@
       mounted: function () {
         if (window.history && window.history.pushState) {
           // 向历史记录中插入了当前页
-          history.pushState(null, null, document.URL);
-          window.addEventListener('popstate', this.goBack, false);
+          history.pushState(null, null, document.URL)
+          window.addEventListener('popstate', this.goBack, false)
         }
       },
       destroyed () {
-        window.removeEventListener('popstate', this.goBack, false);
+        window.removeEventListener('popstate', this.goBack, false)
       },
       methods: {
         one () {
@@ -613,10 +639,11 @@
           this.hasNextPage = this.historyHasNp
         },
         exportData () {
+          debugger
           var path = 'quota/l2/csv?'
           var params = this.requestParams
           for (var prop in params) {
-            if (params[prop] != undefined) {
+            if (params[prop] !== undefined) {
               path += prop + '=' + params[prop] + '&'
             }
           }
@@ -630,9 +657,9 @@
           }
           history.pushState(null, null, document.URL)
         },
-        formatePrice :function(row, column) {
-          if (row.couponPrice){
-            return row.couponPrice/100
+        formatePrice: function (row, column) {
+          if (row.couponPrice) {
+            return row.couponPrice / 100
           }
         }
       }

@@ -142,6 +142,12 @@
       </el-table-column>
       <el-table-column
         align="center"
+        prop="name"
+        label="客户姓名"
+        width="110">
+      </el-table-column>
+      <el-table-column
+        align="center"
         prop="deptName"
         label="中心营业部/分公司"
         width="230">
