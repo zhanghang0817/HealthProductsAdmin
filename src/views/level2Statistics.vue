@@ -128,6 +128,7 @@
             <span v-else-if="scope.row.payway!= null &&  scope.row.payway=== 2">优惠券支付</span>
             <span v-else-if="scope.row.payway!= null &&  scope.row.payway=== 9">其他支付</span>
             <span v-else-if="scope.row.orderTermName!= null">{{scope.row.orderTermName}}</span>
+            <span v-else-if="scope.row.serviceName!= null">{{scope.row.serviceName}}</span>
           </template>
         </el-table-column>
         <el-table-column align="center"
@@ -345,9 +346,11 @@
       name: 'level2Statistics',
       data: function () {
         return {
-          type_options_value: '中心分公司',
-          type_tab_title: '中心营业部/分公司',
+          type_options_value: '全部',
+          type_tab_title: '全部',
           type_options: [{
+            value: '全部'
+          }, {
             value: '中心分公司'
           }, {
             value: '营业部'
@@ -391,7 +394,7 @@
           hasProPage: false,
           listLoading: false,
           requestParams: {
-            statisticsParam: 'deptName',
+            statisticsParam: 'all',
             ps: 20,
             cp: 1,
             year: new Date().getFullYear(),
@@ -479,9 +482,11 @@
           this.requestParams.quarter = undefined
         },
         type_options_value (curValue, oldValue) {
-          if (curValue === '中心分公司') {
+          if (curValue === '全部') {
+            this.requestParams.statisticsParam = 'all'
+          } else if (curValue === '中心分公司') {
             this.requestParams.statisticsParam = 'deptName'
-            this.type_tab_title = '中心营业部/分公司'
+            // this.type_tab_title = '中心营业部/分公司'
           } else if (curValue === '营业部') {
             this.requestParams.statisticsParam = 'subDeptName'
           } else if (curValue === '支付方式') {
@@ -540,7 +545,7 @@
             _this.currentPage = result.body.data.currentPage
             _this.hasNextPage = result.body.data.hasNextPage
             _this.listLoading = false
-            this.type_tab_title = this.type_options_value
+            this.type_tab_title = this.type_options_value === '中心分公司' ? '中心营业部/分公司' : this.type_options_value
             _this.colConfigs = [{
               prop: this.requestParams.statisticsParam,
               label: (this.type_options_value === '中心分公司' ? '中心营业部/分公司' : this.type_options_value)
