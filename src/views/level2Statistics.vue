@@ -439,6 +439,7 @@
           this.showValue = `${this.year}年${arrAll.indexOf(str) + 1}季度`
         },
         type_time_value (curValue, oldValue) {
+          this.resetPageConfig()
           if (curValue === '按月统计') {
             if (this.hisMonthData !== '') {
               let arr = this.hisMonthData.split('-')
@@ -467,6 +468,7 @@
           }
         },
         monthData (curValue, oldValue) {
+          this.resetPageConfig()
           this.hisMonthData = curValue
           let arr = curValue.split('-')
           this.requestParams.year = arr[0]
@@ -476,12 +478,14 @@
           this.requestParams.quarter = undefined
         },
         yearData (curValue, oldValue) {
+          this.resetPageConfig()
           this.hisYearData = curValue
           this.requestParams.year = curValue
           this.requestParams.month = undefined
           this.requestParams.quarter = undefined
         },
         type_options_value (curValue, oldValue) {
+          this.resetPageConfig()
           if (curValue === '全部') {
             this.requestParams.statisticsParam = 'all'
           } else if (curValue === '中心分公司') {
@@ -516,7 +520,12 @@
         next () {
           this.year = this.year * 1 + 1
         },
+        resetPageConfig () {
+          this.currentPage = 1
+          this.requestParams.cp = this.currentPage
+        },
         selectSeason (i) {
+          this.resetPageConfig()
           let that = this
           that.season = i + 1
           let arr = that.valueArr[i].split('-')
