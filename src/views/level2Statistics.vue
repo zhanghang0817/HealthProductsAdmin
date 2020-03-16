@@ -522,6 +522,7 @@
         },
         resetPageConfig () {
           this.currentPage = 1
+          this.hasProPage = false
           this.requestParams.cp = this.currentPage
         },
         selectSeason (i) {
