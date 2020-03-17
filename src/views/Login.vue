@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog title="请先修改初始密码" v-model="changePassword" size="tiny">
+    <el-dialog title="请先修改初始密码" :visible.sync="changePassword" size="tiny">
       <el-col :span="22">
         <el-form :model="changePassRule" :rules="passRules" ref="changePassRule" label-width="100px"
                  class="demo-ruleForm">
