@@ -18,6 +18,7 @@ import homeSignal from '@/views/homeSignal.vue'
 import homeSignalUpdate from '@/views/homeSignalRecord.vue'
 import level2AssessData from '@/views/level2AssessData.vue'
 import level2Statistics from '@/views/level2Statistics.vue'
+
 import homePop from '@/views/homePop.vue'
 
 Vue.use(Router)
